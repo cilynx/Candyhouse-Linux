@@ -1,60 +1,180 @@
---- a/arch/arm/mach-kirkwood/rd88f6281-setup.c	2014-03-06 22:07:02.000000000 -0800
-+++ b/arch/arm/mach-kirkwood/rd88f6281-setup.c	2014-03-29 14:39:11.000000000 -0700
-@@ -26,17 +26,29 @@
- 
- static struct mtd_partition rd88f6281_nand_parts[] = {
- 	{
--		.name = "u-boot",
-+		.name = "uboot",
- 		.offset = 0,
--		.size = SZ_1M
-+		.size = SZ_512K
- 	}, {
--		.name = "uImage",
--		.offset = MTDPART_OFS_NXTBLK,
--		.size = SZ_2M
-+		.name = "u_env",
-+		.offset = SZ_512K,
-+		.size = SZ_128K
- 	}, {
--		.name = "root",
--		.offset = MTDPART_OFS_NXTBLK,
--		.size = MTDPART_SIZ_FULL
-+		.name = "s_env",
-+		.offset = SZ_512K + SZ_128K,
-+		.size = SZ_128K
-+	}, {
-+		.name = "kernel",
-+		.offset = SZ_2M,
-+		.size = 26 * SZ_1M
-+	}, {
-+		.name = "alt_kernel",
-+		.offset = 28 * SZ_1M,
-+		.size = 26 * SZ_1M
-+	}, {
-+		.name = "syscfg",
-+		.offset = 54 * SZ_1M,
-+		.size = 74 * SZ_1M
- 	},
- };
- 
-@@ -60,7 +72,9 @@
- };
- 
- static struct mv643xx_eth_platform_data rd88f6281_ge01_data = {
--	.phy_addr	= MV643XX_ETH_PHY_ADDR(11),
-+	.phy_addr	= MV643XX_ETH_PHY_NONE,
-+	.speed		= SPEED_1000,
-+	.duplex		= DUPLEX_FULL,
- };
- 
- static struct mv_sata_platform_data rd88f6281_sata_data = {
-@@ -94,7 +108,7 @@
- 
- 	kirkwood_ge00_init(&rd88f6281_ge00_data);
- 	kirkwood_pcie_id(&dev, &rev);
--	if (rev == MV88F6281_REV_A0) {
-+	if (rev == MV88F6281_REV_A0 || rev == MV88F6282_REV_A1) {
- 		rd88f6281_switch_chip_data.sw_addr = 10;
- 		kirkwood_ge01_init(&rd88f6281_ge01_data);
- 	} else {
+--- a/arch/arm/boot/dts/Makefile
++++ b/arch/arm/boot/dts/Makefile
+@@ -96,6 +96,7 @@
+ 	k2l-evm.dtb \
+ 	k2e-evm.dtb
+ dtb-$(CONFIG_MACH_KIRKWOOD) += kirkwood-b3.dtb \
++    	kirkwood-candyhouse.dtb \
+ 	kirkwood-cloudbox.dtb \
+ 	kirkwood-d2net.dtb \
+ 	kirkwood-db-88f6281.dtb \
+--- /dev/null
++++ b/arch/arm/boot/dts/kirkwood-candyhouse.dts
+@@ -0,0 +1,156 @@
++/*
++ * kirkwood-candyhouse.dts - Device Tree file for Linksys Candyhouse (E4200v2 / EA4500)
++ *
++ * (c) 2013 Jonas Gorski <jogo@openwrt.org>
++ * (c) 2013 Deutsche Telekom Innovation Laboratories
++ * (c) 2014 Luka Perkov <luka@openwrt.org>
++ * (c) 2014 Randy C. Will <randall.will@gmail.com>
++ *
++ * This file is licensed under the terms of the GNU General Public
++ * License version 2.  This program is licensed "as is" without any
++ * warranty of any kind, whether express or implied.
++ */
++
++/dts-v1/;
++
++#include "kirkwood.dtsi"
++#include "kirkwood-6282.dtsi"
++
++/ {
++	model = "Linksys Candyhouse (E4200v2 / EA4500)";
++	compatible = "linksys,ea4500", "linksys,e4200v2", "marvell,kirkwood-88f6282", "marvell,kirkwood";
++
++	memory {
++		device_type = "memory";
++		reg = <0x00000000 0x8000000>;
++	};
++
++	chosen {
++		bootargs = "console=ttyS0,115200n8 earlyprintk";
++	};
++
++	mbus {
++		pcie-controller {
++			status = "okay";
++
++			pcie@1,0 {
++				status = "okay";
++			};
++
++			pcie@2,0 {
++				status = "okay";
++			};
++		};
++	};
++
++	ocp@f1000000 {
++		pinctrl: pin-controller@10000 {
++			pmx_led_white_health: pmx-led-white-health {
++				marvell,pins = "mpp7";
++				marvell,function = "gpo";
++			};
++			pmx_led_white_pulse: pmx-led-white-pulse {
++				marvell,pins = "mpp14";
++				marvell,function = "gpio";
++			};
++			pmx_btn_wps: pmx-btn-wps {
++				marvell,pins = "mpp47";
++				marvell,function = "gpio";
++			};
++			pmx_btn_reset: pmx-btn-reset {
++				marvell,pins = "mpp48";
++				marvell,function = "gpio";
++			};
++		};
++
++		rtc@10300 {
++			status = "disabled";
++		};
++
++		serial@12000 {
++			status = "okay";
++		};
++
++	};
++
++	gpio_keys {
++		compatible = "gpio-keys";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		pinctrl-0 = < &pmx_btn_wps &pmx_btn_reset >;
++		pinctrl-names = "default";
++
++		button@15 {
++			label = "WPS Button";
++			linux,code = <KEY_WPS_BUTTON>;
++			gpios = <&gpio1 15 GPIO_ACTIVE_LOW>;
++		};
++
++		button@16 {
++			label = "Reset Button";
++			linux,code = <KEY_RESTART>;
++			gpios = <&gpio1 16 GPIO_ACTIVE_LOW>;
++		};
++	};
++
++	gpio-leds {
++		compatible = "gpio-leds";
++		pinctrl-0 = < &pmx_led_white_health &pmx_led_white_pulse >;
++		pinctrl-names = "default";
++
++		white-health {
++			label = "candyhouse:white:health";
++			gpios = <&gpio0 7 GPIO_ACTIVE_HIGH>;
++		};
++
++		white-pulse {
++			label = "candyhouse:white:pulse";
++			gpios = <&gpio0 14 GPIO_ACTIVE_HIGH>;
++		};
++	};
++};
++
++&nand {
++	status = "okay";
++	pinctrl-0 = <&pmx_nand>;
++	pinctrl-names = "default";
++
++	partition@0 {
++		label = "u-boot";
++		reg = <0x0 0x80000>;
++	};
++
++	partition@80000 {
++		label = "u_env";
++		reg = <0x80000 0x20000>;
++	};
++	
++	partition@A0000 {
++		label = "s_env";
++		reg = <0xA0000 0x20000>;
++	};
++
++	partition@200000 {
++		label = "kernel";
++		reg = <0x200000 0x1A00000>;
++	};
++
++	partition@1C00000 {
++		label = "alt_kernel";
++		reg = <0x1C00000 0x1A00000>;
++	};
++
++	partition@3600000 {
++		label = "syscfg";
++		reg = <0x3600000 0x4A00000>;
++	};
++};
++
++&mdio {
++	status = "okay";
++};
++
++&eth0 {
++	status = "okay";
++	ethernet0-port@0 {
++		speed = <1000>;
++		duplex = <1>;
++	};
++};
++
++&eth1 {
++	status = "okay";
++	ethernet1-port@0 {
++		speed = <1000>;
++		duplex = <1>;
++	};
++};

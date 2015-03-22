@@ -9,7 +9,7 @@ LD=$(CROSS_COMPILE)ld
 ARCH=arm
 LOADADDR=0x00008000
 
-VERSION=3.13.7
+VERSION=3.17.2
 LINUX=linux-$(VERSION)
 
 all::	.built
@@ -34,7 +34,9 @@ install:: .installed
 
 .built:	.configured
 	cd $(LINUX) && make -j4 ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) LOADADDR=$(LOADADDR) uImage #modules
-	cp $(LINUX)/arch/arm/boot/uImage uImage-${VERSION}-candyhouse
+	cd $(LINUX) && make ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) dtbs
+	cat $(LINUX)/arch/arm/boot/zImage $(LINUX)/arch/arm/boot/dts/kirkwood-candyhouse.dtb > /tmp/zImage+kirkwood-candyhouse.dtb 
+	mkimage -A arm -O linux -T kernel -C none -a $(LOADADDR) -e $(LOADADDR) -n $(LINUX) -d /tmp/zImage+kirkwood-candyhouse.dtb uImage-${VERSION}-candyhouse
 	touch $@
 
 .installed: .built
