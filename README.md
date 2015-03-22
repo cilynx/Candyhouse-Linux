@@ -12,6 +12,10 @@ Yup, it really is that simple.  The included [Makefile](Makefile) will fetch the
 
 You can flash the uImage to your router like you would any normal SSA and it will look for a root filesystem on `/dev/sda1` -- e.g. a USB stick.
 
+For more info and discussion about making these kernels work in practice, check out:
+
+[http://www.wolfteck.com/projects/candyhouse/install/](http://www.wolfteck.com/projects/candyhouse/install/)
+
 # Building / Installing Modules
 
 Mount your router's rootfs on `/mnt`.
