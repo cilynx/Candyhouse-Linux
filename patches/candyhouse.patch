@@ -1,0 +1,60 @@
+--- a/arch/arm/mach-kirkwood/rd88f6281-setup.c	2014-03-06 22:07:02.000000000 -0800
++++ b/arch/arm/mach-kirkwood/rd88f6281-setup.c	2014-03-29 14:39:11.000000000 -0700
+@@ -26,17 +26,29 @@
+ 
+ static struct mtd_partition rd88f6281_nand_parts[] = {
+ 	{
+-		.name = "u-boot",
++		.name = "uboot",
+ 		.offset = 0,
+-		.size = SZ_1M
++		.size = SZ_512K
+ 	}, {
+-		.name = "uImage",
+-		.offset = MTDPART_OFS_NXTBLK,
+-		.size = SZ_2M
++		.name = "u_env",
++		.offset = SZ_512K,
++		.size = SZ_128K
+ 	}, {
+-		.name = "root",
+-		.offset = MTDPART_OFS_NXTBLK,
+-		.size = MTDPART_SIZ_FULL
++		.name = "s_env",
++		.offset = SZ_512K + SZ_128K,
++		.size = SZ_128K
++	}, {
++		.name = "kernel",
++		.offset = SZ_2M,
++		.size = 26 * SZ_1M
++	}, {
++		.name = "alt_kernel",
++		.offset = 28 * SZ_1M,
++		.size = 26 * SZ_1M
++	}, {
++		.name = "syscfg",
++		.offset = 54 * SZ_1M,
++		.size = 74 * SZ_1M
+ 	},
+ };
+ 
+@@ -60,7 +72,9 @@
+ };
+ 
+ static struct mv643xx_eth_platform_data rd88f6281_ge01_data = {
+-	.phy_addr	= MV643XX_ETH_PHY_ADDR(11),
++	.phy_addr	= MV643XX_ETH_PHY_NONE,
++	.speed		= SPEED_1000,
++	.duplex		= DUPLEX_FULL,
+ };
+ 
+ static struct mv_sata_platform_data rd88f6281_sata_data = {
+@@ -94,7 +108,7 @@
+ 
+ 	kirkwood_ge00_init(&rd88f6281_ge00_data);
+ 	kirkwood_pcie_id(&dev, &rev);
+-	if (rev == MV88F6281_REV_A0) {
++	if (rev == MV88F6281_REV_A0 || rev == MV88F6282_REV_A1) {
+ 		rd88f6281_switch_chip_data.sw_addr = 10;
+ 		kirkwood_ge01_init(&rd88f6281_ge01_data);
+ 	} else {
