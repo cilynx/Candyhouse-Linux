@@ -1,16 +1,16 @@
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
-@@ -96,6 +96,7 @@
- 	k2l-evm.dtb \
- 	k2e-evm.dtb
- dtb-$(CONFIG_MACH_KIRKWOOD) += kirkwood-b3.dtb \
-+    	kirkwood-candyhouse.dtb \
- 	kirkwood-cloudbox.dtb \
- 	kirkwood-d2net.dtb \
- 	kirkwood-db-88f6281.dtb \
+@@ -90,6 +90,7 @@ 
+        kirkwood-dns325.dtb \
+	kirkwood-dockstar.dtb \
+	kirkwood-dreamplug.dtb \
++	kirkwood-candyhouse.dtb \
+	kirkwood-goflexnet.dtb \
+	kirkwood-guruplug-server-plus.dtb \
+	kirkwood-ib62x0.dtb \
 --- /dev/null
 +++ b/arch/arm/boot/dts/kirkwood-candyhouse.dts
-@@ -0,0 +1,156 @@
+@@ -0,0 +1,167 @@
 +/*
 + * kirkwood-candyhouse.dts - Device Tree file for Linksys Candyhouse (E4200v2 / EA4500)
 + *
@@ -57,7 +57,7 @@
 +	};
 +
 +	ocp@f1000000 {
-+		pinctrl: pin-controller@10000 {
++		pinctrl: pinctrl@10000 {
 +			pmx_led_white_health: pmx-led-white-health {
 +				marvell,pins = "mpp7";
 +				marvell,function = "gpo";

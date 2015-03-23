@@ -14,13 +14,7 @@ You can flash the uImage to your router like you would any normal SSA and it wil
 
 # Building / Installing Modules
 
-Mount your router's rootfs on `/mnt`.
-
-```bash
-$ make install
-```
-
-It takes forever to build the modules since there are way-way too many unnecessary modules being built, but eventually they'll all be installed to `/mnt` and you'll be on your way.
+No need.  All required functions are built into the kernel image.  No more mounting your router FS to you build box!
 
 # Cleaning Up
 
