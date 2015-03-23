@@ -1,5 +1,3 @@
-INSTALL_MOD_PATH = /mnt # Generally, this should point to your rootfs USB stick
-
 export CC=gcc
 
 CROSS_COMPILE=arm-none-eabi-
@@ -9,11 +7,10 @@ LD=$(CROSS_COMPILE)ld
 ARCH=arm
 LOADADDR=0x00008000
 
-VERSION=3.16.3
+VERSION=3.16.4
 LINUX=linux-$(VERSION)
 
 all::	.built
-install:: .installed
 
 .fetched:
 	wget https://www.kernel.org/pub/linux/kernel/v3.x/$(LINUX).tar.xz
@@ -37,10 +34,6 @@ install:: .installed
 	cd $(LINUX) && make ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) dtbs
 	cat $(LINUX)/arch/arm/boot/zImage $(LINUX)/arch/arm/boot/dts/kirkwood-candyhouse.dtb > /tmp/zImage+kirkwood-candyhouse.dtb 
 	mkimage -A arm -O linux -T kernel -C none -a $(LOADADDR) -e $(LOADADDR) -n $(LINUX) -d /tmp/zImage+kirkwood-candyhouse.dtb uImage-${VERSION}-candyhouse
-	touch $@
-
-.installed: .built
-	cd $(LINUX) && sudo make ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) INSTALL_MOD_PATH=$(PREFIX) modules_install
 	touch $@
 
 clean::
