@@ -1,13 +1,13 @@
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
-@@ -90,6 +90,7 @@ 
-        kirkwood-dns325.dtb \
-	kirkwood-dockstar.dtb \
-	kirkwood-dreamplug.dtb \
+@@ -86,6 +86,7 @@
+	k2e-evm.dtb
+ kirkwood := \
+	kirkwood-b3.dtb \
 +	kirkwood-candyhouse.dtb \
-	kirkwood-goflexnet.dtb \
-	kirkwood-guruplug-server-plus.dtb \
-	kirkwood-ib62x0.dtb \
+	kirkwood-cloudbox.dtb \
+	kirkwood-db-88f6281.dtb \
+	kirkwood-db-88f6282.dtb \
 --- /dev/null
 +++ b/arch/arm/boot/dts/kirkwood-candyhouse.dts
 @@ -0,0 +1,167 @@
