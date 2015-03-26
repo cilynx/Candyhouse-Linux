@@ -1,4 +1,4 @@
-Linux version 3.18.4-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 10:17:40 PDT 2015
+Linux version 3.18.5-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 10:33:56 PDT 2015
 
 eth0      Link encap:Ethernet  HWaddr 48:f8:b3:72:be:94  
           inet addr:10.2.0.1  Bcast:10.255.255.255  Mask:255.0.0.0
@@ -25,9 +25,9 @@ wlan0     Link encap:Ethernet  HWaddr 48:f8:b3:72:be:96
           inet6 addr: fe80::4af8:b3ff:fe72:be96/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:7 errors:0 dropped:0 overruns:0 carrier:0
+          TX packets:8 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000 
-          RX bytes:0 (0.0 B)  TX bytes:704 (704.0 B)
+          RX bytes:0 (0.0 B)  TX bytes:792 (792.0 B)
 
 wlan1     Link encap:Ethernet  HWaddr 48:f8:b3:72:be:98  
           inet addr:192.168.10.1  Bcast:192.168.10.255  Mask:255.255.255.0
@@ -125,7 +125,7 @@ bootcmd=run nandboot
 
 
 Booting Linux on physical CPU 0x0
-Linux version 3.18.4-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 10:17:40 PDT 2015
+Linux version 3.18.5-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 10:33:56 PDT 2015
 CPU: Feroceon 88FR131 [56251311] revision 1 (ARMv5TE), cr=0005397f
 CPU: VIVT data cache, VIVT instruction cache
 Machine model: Linksys Candyhouse (E4200v2 / EA4500)
@@ -160,7 +160,7 @@ pid_max: default: 32768 minimum: 301
 Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
 Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
 CPU: Testing write buffer coherency: ok
-Setting up static identity map for 0x5954c0 - 0x5954fc
+Setting up static identity map for 0x5956a0 - 0x5956dc
 mvebu-soc-id: MVEBU SoC ID=0x6282, Rev=0x1
 devtmpfs: initialized
 pinctrl core: initialized pinctrl subsystem
@@ -345,7 +345,7 @@ EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
 VFS: Mounted root (ext4 filesystem) readonly on device 8:1.
 Freeing unused kernel memory: 188K (c06b9000 - c06e8000)
 systemd-udevd[156]: starting version 215
-random: udevd urandom read with 63 bits of entropy available
+random: udevd urandom read with 61 bits of entropy available
 cfg80211: Calling CRDA to update world regulatory domain
 cfg80211: Calling CRDA to update world regulatory domain
 cfg80211: World regulatory domain updated:
@@ -379,5 +379,8 @@ ieee80211 phy0: Trying to reload the firmware again
 ieee80211 phy0: Command MAC_MULTICAST_ADR timeout after 10000 ms
 ieee80211 phy0: 88w8366 v7, 48f8b372be96, AP firmware 5.2.8.17
 IPv6: ADDRCONF(NETDEV_UP): wlan0: link is not ready
+ieee80211 phy0: dropped TX frame since radio disabled
+ieee80211 phy0: dropped TX frame since radio disabled
+ieee80211 phy0: dropped TX frame since radio disabled
 ieee80211 phy0: dropped TX frame since radio disabled
 IPv6: ADDRCONF(NETDEV_CHANGE): wlan0: link becomes ready
