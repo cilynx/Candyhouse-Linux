@@ -1,4 +1,5 @@
-Linux version 3.18.1-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Wed Mar 25 20:08:33 PDT 2015
+Linux version 3.18.2-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Wed Mar 25 20:33:33 PDT 2015
+
 eth0      Link encap:Ethernet  HWaddr 48:f8:b3:72:be:94  
           inet addr:10.2.0.1  Bcast:10.255.255.255  Mask:255.0.0.0
           inet6 addr: fe80::4af8:b3ff:fe72:be94/64 Scope:Link
@@ -13,10 +14,10 @@ eth1      Link encap:Ethernet  HWaddr 48:f8:b3:72:be:95
           inet addr:10.42.0.32  Bcast:10.42.0.255  Mask:255.255.255.0
           inet6 addr: fe80::4af8:b3ff:fe72:be95/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:428 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:434 errors:0 dropped:0 overruns:0 carrier:0
+          RX packets:38 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:50 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000 
-          RX bytes:45137 (44.0 KiB)  TX bytes:60965 (59.5 KiB)
+          RX bytes:4119 (4.0 KiB)  TX bytes:4760 (4.6 KiB)
           Interrupt:84 
 
 wlan0     Link encap:Ethernet  HWaddr 48:f8:b3:72:be:96  
@@ -24,9 +25,9 @@ wlan0     Link encap:Ethernet  HWaddr 48:f8:b3:72:be:96
           inet6 addr: fe80::4af8:b3ff:fe72:be96/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:8 errors:0 dropped:0 overruns:0 carrier:0
+          TX packets:6 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000 
-          RX bytes:0 (0.0 B)  TX bytes:792 (792.0 B)
+          RX bytes:0 (0.0 B)  TX bytes:616 (616.0 B)
 
 wlan1     Link encap:Ethernet  HWaddr 48:f8:b3:72:be:98  
           inet addr:192.168.10.1  Bcast:192.168.10.255  Mask:255.255.255.0
@@ -121,8 +122,10 @@ mainlineLinux=no
 boot_part_ready=3
 boot_part=1
 bootcmd=run nandboot
+
+
 Booting Linux on physical CPU 0x0
-Linux version 3.18.1-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Wed Mar 25 20:08:33 PDT 2015
+Linux version 3.18.2-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Wed Mar 25 20:33:33 PDT 2015
 CPU: Feroceon 88FR131 [56251311] revision 1 (ARMv5TE), cr=0005397f
 CPU: VIVT data cache, VIVT instruction cache
 Machine model: Linksys Candyhouse (E4200v2 / EA4500)
@@ -157,7 +160,7 @@ pid_max: default: 32768 minimum: 301
 Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
 Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
 CPU: Testing write buffer coherency: ok
-Setting up static identity map for 0x595130 - 0x59516c
+Setting up static identity map for 0x5951d8 - 0x595214
 mvebu-soc-id: MVEBU SoC ID=0x6282, Rev=0x1
 devtmpfs: initialized
 pinctrl core: initialized pinctrl subsystem
@@ -342,7 +345,8 @@ EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
 VFS: Mounted root (ext4 filesystem) readonly on device 8:1.
 Freeing unused kernel memory: 188K (c06b9000 - c06e8000)
 systemd-udevd[156]: starting version 215
-random: udevd urandom read with 62 bits of entropy available
+random: udevd urandom read with 61 bits of entropy available
+cfg80211: Calling CRDA to update world regulatory domain
 cfg80211: Calling CRDA to update world regulatory domain
 cfg80211: World regulatory domain updated:
 cfg80211:  DFS Master region: unset
