@@ -1,4 +1,4 @@
-Linux version 3.18.7-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 10:57:10 PDT 2015
+Linux version 3.18.8-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 11:06:41 PDT 2015
 
 eth0      Link encap:Ethernet  HWaddr 48:f8:b3:72:be:94  
           inet addr:10.2.0.1  Bcast:10.255.255.255  Mask:255.0.0.0
@@ -14,10 +14,10 @@ eth1      Link encap:Ethernet  HWaddr 48:f8:b3:72:be:95
           inet addr:10.42.0.32  Bcast:10.42.0.255  Mask:255.255.255.0
           inet6 addr: fe80::4af8:b3ff:fe72:be95/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:68 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:83 errors:0 dropped:0 overruns:0 carrier:0
+          RX packets:159 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:170 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000 
-          RX bytes:6884 (6.7 KiB)  TX bytes:7748 (7.5 KiB)
+          RX bytes:13738 (13.4 KiB)  TX bytes:14246 (13.9 KiB)
           Interrupt:84 
 
 wlan0     Link encap:Ethernet  HWaddr 48:f8:b3:72:be:96  
@@ -25,9 +25,9 @@ wlan0     Link encap:Ethernet  HWaddr 48:f8:b3:72:be:96
           inet6 addr: fe80::4af8:b3ff:fe72:be96/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:7 errors:0 dropped:0 overruns:0 carrier:0
+          TX packets:8 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000 
-          RX bytes:0 (0.0 B)  TX bytes:704 (704.0 B)
+          RX bytes:0 (0.0 B)  TX bytes:792 (792.0 B)
 
 wlan1     Link encap:Ethernet  HWaddr 48:f8:b3:72:be:98  
           inet addr:192.168.10.1  Bcast:192.168.10.255  Mask:255.255.255.0
@@ -125,13 +125,13 @@ bootcmd=run nandboot
 
 
 Booting Linux on physical CPU 0x0
-Linux version 3.18.7-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 10:57:10 PDT 2015
+Linux version 3.18.8-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 11:06:41 PDT 2015
 CPU: Feroceon 88FR131 [56251311] revision 1 (ARMv5TE), cr=0005397f
 CPU: VIVT data cache, VIVT instruction cache
 Machine model: Linksys Candyhouse (E4200v2 / EA4500)
 Memory policy: Data cache writeback
 On node 0 totalpages: 32768
-free_area_init_node: node 0, pgdat c071e4e4, node_mem_map c7efb000
+free_area_init_node: node 0, pgdat c071e2bc, node_mem_map c7efb000
   Normal zone: 256 pages used for memmap
   Normal zone: 0 pages reserved
   Normal zone: 32768 pages, LIFO batch:7
@@ -142,7 +142,7 @@ Kernel command line: rootdelay=10 root=/dev/sda1 noinitrd console=ttyS0,115200
 PID hash table entries: 512 (order: -1, 2048 bytes)
 Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
 Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
-Memory: 122340K/131072K available (5694K kernel code, 219K rwdata, 1160K rodata, 184K init, 224K bss, 8732K reserved)
+Memory: 122344K/131072K available (5694K kernel code, 218K rwdata, 1160K rodata, 184K init, 224K bss, 8728K reserved)
 Virtual kernel memory layout:
     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
     fixmap  : 0xffc00000 - 0xffe00000   (2048 kB)
@@ -151,8 +151,8 @@ Virtual kernel memory layout:
     modules : 0xbf000000 - 0xc0000000   (  16 MB)
       .text : 0xc0008000 - 0xc06b9dac   (6856 kB)
       .init : 0xc06ba000 - 0xc06e8000   ( 184 kB)
-      .data : 0xc06e8000 - 0xc071ed20   ( 220 kB)
-       .bss : 0xc071ed20 - 0xc07570ac   ( 225 kB)
+      .data : 0xc06e8000 - 0xc071eb00   ( 219 kB)
+       .bss : 0xc071eb00 - 0xc0756e8c   ( 225 kB)
 NR_IRQS:16 nr_irqs:16 16
 sched_clock: 32 bits at 200MHz, resolution 5ns, wraps every 21474836475ns
 Calibrating delay loop... 1196.85 BogoMIPS (lpj=5984256)
@@ -160,7 +160,7 @@ pid_max: default: 32768 minimum: 301
 Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
 Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
 CPU: Testing write buffer coherency: ok
-Setting up static identity map for 0x595860 - 0x59589c
+Setting up static identity map for 0x5958d0 - 0x59590c
 mvebu-soc-id: MVEBU SoC ID=0x6282, Rev=0x1
 devtmpfs: initialized
 pinctrl core: initialized pinctrl subsystem
@@ -345,7 +345,7 @@ EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
 VFS: Mounted root (ext4 filesystem) readonly on device 8:1.
 Freeing unused kernel memory: 184K (c06ba000 - c06e8000)
 systemd-udevd[156]: starting version 215
-random: udevd urandom read with 61 bits of entropy available
+random: udevd urandom read with 60 bits of entropy available
 cfg80211: Calling CRDA to update world regulatory domain
 cfg80211: Calling CRDA to update world regulatory domain
 cfg80211: World regulatory domain updated:

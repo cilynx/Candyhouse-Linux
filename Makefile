@@ -1,4 +1,4 @@
-VERSION=3.18.7
+VERSION=3.18.8
 LINUX=linux-$(VERSION)
 
 all::	.built
@@ -28,4 +28,4 @@ all::	.built
 	touch $@
 
 clean::
-	rm -rf .fetched $(LINUX) $(LINUX).tar.xz .extracted .patched .patchlog .configured .built .depends uImage-$(VERSION)-candyhouse
+	rm -rf .fetched $(LINUX) $(LINUX).tar.xz .extracted .patched .patchlog .configured .built uImage-$(VERSION)-candyhouse
