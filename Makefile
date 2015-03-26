@@ -1,4 +1,4 @@
-VERSION=3.18.6
+VERSION=3.18.7
 LINUX=linux-$(VERSION)
 
 all::	.built
