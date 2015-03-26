@@ -1,4 +1,4 @@
-Linux version 3.18.10-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 11:47:38 PDT 2015
+Linux version 3.19.1-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 12:05:32 PDT 2015
 
 eth0      Link encap:Ethernet  HWaddr 48:f8:b3:72:be:94  
           inet addr:10.2.0.1  Bcast:10.255.255.255  Mask:255.0.0.0
@@ -14,10 +14,10 @@ eth1      Link encap:Ethernet  HWaddr 48:f8:b3:72:be:95
           inet addr:10.42.0.32  Bcast:10.42.0.255  Mask:255.255.255.0
           inet6 addr: fe80::4af8:b3ff:fe72:be95/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:75 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:86 errors:0 dropped:0 overruns:0 carrier:0
+          RX packets:314 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:332 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000 
-          RX bytes:7542 (7.3 KiB)  TX bytes:8018 (7.8 KiB)
+          RX bytes:33634 (32.8 KiB)  TX bytes:33606 (32.8 KiB)
           Interrupt:84 
 
 wlan0     Link encap:Ethernet  HWaddr 48:f8:b3:72:be:96  
@@ -125,13 +125,13 @@ bootcmd=run nandboot
 
 
 Booting Linux on physical CPU 0x0
-Linux version 3.18.10-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 11:47:38 PDT 2015
+Linux version 3.19.1-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 12:05:32 PDT 2015
 CPU: Feroceon 88FR131 [56251311] revision 1 (ARMv5TE), cr=0005397f
 CPU: VIVT data cache, VIVT instruction cache
 Machine model: Linksys Candyhouse (E4200v2 / EA4500)
 Memory policy: Data cache writeback
 On node 0 totalpages: 32768
-free_area_init_node: node 0, pgdat c071e2bc, node_mem_map c7efb000
+free_area_init_node: node 0, pgdat c071e904, node_mem_map c7efa000
   Normal zone: 256 pages used for memmap
   Normal zone: 0 pages reserved
   Normal zone: 32768 pages, LIFO batch:7
@@ -142,17 +142,17 @@ Kernel command line: rootdelay=10 root=/dev/sda1 noinitrd console=ttyS0,115200
 PID hash table entries: 512 (order: -1, 2048 bytes)
 Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
 Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
-Memory: 122344K/131072K available (5694K kernel code, 218K rwdata, 1160K rodata, 184K init, 224K bss, 8728K reserved)
+Memory: 122344K/131072K available (5703K kernel code, 220K rwdata, 1148K rodata, 188K init, 219K bss, 8728K reserved, 0K cma-reserved)
 Virtual kernel memory layout:
     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
-    fixmap  : 0xffc00000 - 0xffe00000   (2048 kB)
+    fixmap  : 0xffc00000 - 0xfff00000   (3072 kB)
     vmalloc : 0xc8800000 - 0xff000000   ( 872 MB)
     lowmem  : 0xc0000000 - 0xc8000000   ( 128 MB)
     modules : 0xbf000000 - 0xc0000000   (  16 MB)
-      .text : 0xc0008000 - 0xc06b9dac   (6856 kB)
-      .init : 0xc06ba000 - 0xc06e8000   ( 184 kB)
-      .data : 0xc06e8000 - 0xc071eb00   ( 219 kB)
-       .bss : 0xc071eb00 - 0xc0756e8c   ( 225 kB)
+      .text : 0xc0008000 - 0xc06b8df4   (6852 kB)
+      .init : 0xc06b9000 - 0xc06e8000   ( 188 kB)
+      .data : 0xc06e8000 - 0xc071f1a0   ( 221 kB)
+       .bss : 0xc071f1a0 - 0xc0755e80   ( 220 kB)
 NR_IRQS:16 nr_irqs:16 16
 sched_clock: 32 bits at 200MHz, resolution 5ns, wraps every 21474836475ns
 Calibrating delay loop... 1196.85 BogoMIPS (lpj=5984256)
@@ -160,11 +160,10 @@ pid_max: default: 32768 minimum: 301
 Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
 Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
 CPU: Testing write buffer coherency: ok
-Setting up static identity map for 0x595cb0 - 0x595cec
+Setting up static identity map for 0x5984a8 - 0x5984e4
 mvebu-soc-id: MVEBU SoC ID=0x6282, Rev=0x1
 devtmpfs: initialized
 pinctrl core: initialized pinctrl subsystem
-regulator-dummy: no parameters
 NET: Registered protocol family 16
 DMA: preallocated 256 KiB pool for atomic coherent allocations
 cpuidle: using governor ladder
@@ -201,7 +200,6 @@ Installing knfsd (copyright (C) 1996 okir@monad.swb.de).
 FS-Cache: Netfs 'cifs' registered for caching
 Key type cifs.spnego registered
 Key type cifs.idmap registered
-msgmni has been set to 238
 io scheduler noop registered
 io scheduler deadline registered (default)
 kirkwood-pinctrl f1010000.pin-controller: registered pinctrl driver
@@ -242,7 +240,7 @@ f1012000.serial: ttyS0 at MMIO 0xf1012000 (irq = 26, base_baud = 12500000) is a 
 console [ttyS0] enabled
 nand: device found, Manufacturer ID: 0xad, Chip ID: 0xf1
 nand: Hynix H27U1G8F2BTR-BC
-nand: 128MiB, SLC, page size: 2048, OOB size: 64
+nand: 128 MiB, SLC, erase size: 128 KiB, page size: 2048, OOB size: 64
 Scanning device for bad blocks
 6 ofpart partitions found on MTD device orion_nand
 Creating 6 MTD partitions on "orion_nand":
@@ -269,6 +267,7 @@ orion-ehci f1050000.ehci: USB 2.0 started, EHCI 1.00
 hub 1-0:1.0: USB hub found
 hub 1-0:1.0: 1 port detected
 usbcore: registered new interface driver usb-storage
+Driver 'mmcblk' needs updating - please use bus_type methods
 Netfilter messages via NETLINK v0.30.
 nfnl_acct: registering with nfnetlink.
 nf_conntrack version 0.5.0 (1911 buckets, 7644 max)
@@ -343,7 +342,7 @@ EXT4-fs (sda1): couldn't mount as ext3 due to feature incompatibilities
 EXT4-fs (sda1): couldn't mount as ext2 due to feature incompatibilities
 EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
 VFS: Mounted root (ext4 filesystem) readonly on device 8:1.
-Freeing unused kernel memory: 184K (c06ba000 - c06e8000)
+Freeing unused kernel memory: 188K (c06b9000 - c06e8000)
 systemd-udevd[156]: starting version 215
 random: udevd urandom read with 61 bits of entropy available
 cfg80211: Calling CRDA to update world regulatory domain
@@ -379,10 +378,5 @@ ieee80211 phy0: Trying to reload the firmware again
 ieee80211 phy0: Command MAC_MULTICAST_ADR timeout after 10000 ms
 ieee80211 phy0: 88w8366 v7, 48f8b372be96, AP firmware 5.2.8.17
 IPv6: ADDRCONF(NETDEV_UP): wlan0: link is not ready
-ieee80211 phy0: dropped TX frame since radio disabled
-ieee80211 phy0: dropped TX frame since radio disabled
-ieee80211 phy0: dropped TX frame since radio disabled
-ieee80211 phy0: dropped TX frame since radio disabled
-ieee80211 phy0: dropped TX frame since radio disabled
 ieee80211 phy0: dropped TX frame since radio disabled
 IPv6: ADDRCONF(NETDEV_CHANGE): wlan0: link becomes ready
