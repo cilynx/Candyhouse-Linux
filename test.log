@@ -1,0 +1,379 @@
+Linux version 3.18.1-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Wed Mar 25 20:08:33 PDT 2015
+eth0      Link encap:Ethernet  HWaddr 48:f8:b3:72:be:94  
+          inet addr:10.2.0.1  Bcast:10.255.255.255  Mask:255.0.0.0
+          inet6 addr: fe80::4af8:b3ff:fe72:be94/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:14 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:900 (900.0 B)
+          Interrupt:83 
+
+eth1      Link encap:Ethernet  HWaddr 48:f8:b3:72:be:95  
+          inet addr:10.42.0.32  Bcast:10.42.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::4af8:b3ff:fe72:be95/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:428 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:434 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:45137 (44.0 KiB)  TX bytes:60965 (59.5 KiB)
+          Interrupt:84 
+
+wlan0     Link encap:Ethernet  HWaddr 48:f8:b3:72:be:96  
+          inet addr:192.168.0.1  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::4af8:b3ff:fe72:be96/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:8 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:792 (792.0 B)
+
+wlan1     Link encap:Ethernet  HWaddr 48:f8:b3:72:be:98  
+          inet addr:192.168.10.1  Bcast:192.168.10.255  Mask:255.255.255.0
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+bootdelay=0
+baudrate=115200
+loads_echo=0
+ipaddr=192.168.1.10
+serverip=192.168.1.254
+rootpath=/mnt/ARM_FS
+netmask=255.255.255.0
+run_diag=yes
+console=console=ttyS0,115200
+badcount=0
+bootbadcount=0
+uenvbadcount=0
+senvbadcount=0
+buffbadcount=0
+fs_bootargs=unused
+mtdparts=mtdparts=nand_mtd:512k(uboot)ro,128k@512k(u_env),128k@640k(s_env),26m@2m(kernel),26m@2m(rootfs)fs,26m@28m(alt_kernel),26m@28m(alt_rootfs)fs,74m@54m(syscfg)
+ethprime=egiga0
+bootargs_root=root=/dev/nfs rw
+fs_bootargs_root=root=/dev/mtdblock4 ro rootfstype=jffs2
+alt_fs_bootargs_root=root=/dev/mtdblock6 ro rootfstype=jffs2
+usb_fs_bootargs_root=root=/dev/sda1 rw rootfstype=ext2
+bootargs_end=:::DB88FXX81:eth0:none
+image_name=uImage
+nandboot=nand read.e 0x2000000 0x200000 0x300000; setenv bootargs $(console) $(mtdparts) $(fs_bootargs_root) serial_number=$(sn) uuid=$(uuid) hw_version=$(hw) device_mac=$(mac) factory_date=$(date) wps_pin=$(wps); bootm 0x2000000;
+altnandboot=nand read.e 0x2000000 0x1c00000 0x300000; setenv bootargs $(console) $(mtdparts) $(alt_fs_bootargs_root) serial_number=$(sn) uuid=$(uuid) hw_version=$(hw) device_mac=$(mac) factory_date=$(date) wps_pin=$(wps); bootm 0x2000000;
+usbboot=usb start;ext2load usb 0:1 2000000 /uImage; setenv bootargs $(console) $(mtdparts) $(usb_fs_bootargs_root) rootdelay=10; bootm 0x2000000;
+standalone=fsload 0x2000000 $(image_name);setenv bootargs $(console) root=/dev/mtdblock0 rw ip=$(ipaddr):$(serverip)$(bootargs_end) $(mvPhoneConfig); bootm 0x2000000;
+lcd0_enable=0
+lcd0_params=640x480-16@60
+ethmtu=1500
+eth1mtu=1500
+mvPhoneConfig=mv_phone_config=dev[0]:fxs,dev[1]:fxo
+mvNetConfig=mv_net_config=(00:11:88:0f:62:81,0:1:2:3),mtu=1500
+usb0Mode=host
+yuk_ethaddr=00:00:00:EE:51:81
+nandEcc=1bit
+netretry=no
+rcvrip=169.254.100.100
+loadaddr=0x02000000
+autoload=no
+image_multi=yes
+mtdparts_version=4
+envsaved=yes
+ethact=egiga0
+mfgboot=nand read.e 0x2000000 0x3600000 0x300000; setenv bootargs $(console) $(mfg_mtdparts) $(mfg_fs_bootargs_root) serial_number=$(sn) uuid=$(uuid) hw_version=$(hw) device_mac=$(mac) factory_date=$(date) wps_pin=$(wps); bootm 0x2000000;
+mfg_fs_bootargs_root=root=/dev/mtdblock8 ro rootfstype=jffs2
+mfg_mtdparts=mtdparts=nand_mtd:512k(uboot)ro,128k@512k(u_env),128k@640k(s_env),26m@2m(kernel),26m@2m(rootfs)fs,26m@28m(alt_kernel),26m@28m(alt_rootfs)fs,26m@54m(mfg_kernel),26m@54m(mfg_rootfs)fs,48m@80m(syscfg)
+nfsboot=tftp 0x2000000 uImage; setenv bootargs $(console) $(mfg_mtdparts) $(bootargs_root) nfsroot=$(serverip):$(rootpath) ip=$(ipaddr):$(serverip)$(bootargs_end); bootm 0x2000000;
+auto_recovery=yes
+bootargs=console=ttyS0,115200 mtdparts=nand_mtd:512k(uboot)ro,128k@512k(u_env),128k@640k(s_env),26m@2m(kernel),26m@2m(rootfs)fs,26m@28m(alt_kernel),26m@28m(alt_rootfs)fs,74m@54m(syscfg) root=/dev/mtdblock4 ro rootfstype=jffs2 serial_number=12A10607300112 uuid=0987039A24209B813EF3B853CC543DBB hw_version=RGWM-C4_0GA device_mac=48:F8:B3:72:BE:94 factory_date=2013/07/05 wps_pin=92696785
+stdin=serial
+stdout=serial
+stderr=serial
+enaMonExt=no
+enaCpuStream=no
+enaWrAllo=no
+pexMode=RC
+disL2Cache=no
+setL2CacheWT=yes
+disL2Prefetch=yes
+enaICPref=yes
+enaDCPref=yes
+sata_dma_mode=yes
+netbsd_en=no
+vxworks_en=no
+disaMvPnp=no
+enaAutoRecovery=yes
+pcieTune=no
+pcieTune1=no
+layout=ver.0.0.7
+model=EA4500
+hw=RGWM-C4_0GA
+edal_key=FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+mac=48:F8:B3:72:BE:94
+ethaddr=48:F8:B3:72:BE:94
+eth1addr=48:F8:B3:72:BE:95
+date=2013/07/05
+sn=12A10607300112
+uuid=0987039A24209B813EF3B853CC543DBB
+wps=92696785
+arcNumber=1682
+mainlineLinux=no
+boot_part_ready=3
+boot_part=1
+bootcmd=run nandboot
+Booting Linux on physical CPU 0x0
+Linux version 3.18.1-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Wed Mar 25 20:08:33 PDT 2015
+CPU: Feroceon 88FR131 [56251311] revision 1 (ARMv5TE), cr=0005397f
+CPU: VIVT data cache, VIVT instruction cache
+Machine model: Linksys Candyhouse (E4200v2 / EA4500)
+Memory policy: Data cache writeback
+On node 0 totalpages: 32768
+free_area_init_node: node 0, pgdat c071e484, node_mem_map c7efb000
+  Normal zone: 256 pages used for memmap
+  Normal zone: 0 pages reserved
+  Normal zone: 32768 pages, LIFO batch:7
+pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+pcpu-alloc: [0] 0 
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 32512
+Kernel command line: rootdelay=10 root=/dev/sda1 noinitrd console=ttyS0,115200
+PID hash table entries: 512 (order: -1, 2048 bytes)
+Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
+Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
+Memory: 122340K/131072K available (5690K kernel code, 219K rwdata, 1160K rodata, 188K init, 224K bss, 8732K reserved)
+Virtual kernel memory layout:
+    vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+    fixmap  : 0xffc00000 - 0xffe00000   (2048 kB)
+    vmalloc : 0xc8800000 - 0xff000000   ( 872 MB)
+    lowmem  : 0xc0000000 - 0xc8000000   ( 128 MB)
+    modules : 0xbf000000 - 0xc0000000   (  16 MB)
+      .text : 0xc0008000 - 0xc06b8dac   (6852 kB)
+      .init : 0xc06b9000 - 0xc06e8000   ( 188 kB)
+      .data : 0xc06e8000 - 0xc071ecc0   ( 220 kB)
+       .bss : 0xc071ecc0 - 0xc075704c   ( 225 kB)
+NR_IRQS:16 nr_irqs:16 16
+sched_clock: 32 bits at 200MHz, resolution 5ns, wraps every 21474836475ns
+Calibrating delay loop... 1196.85 BogoMIPS (lpj=5984256)
+pid_max: default: 32768 minimum: 301
+Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
+Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
+CPU: Testing write buffer coherency: ok
+Setting up static identity map for 0x595130 - 0x59516c
+mvebu-soc-id: MVEBU SoC ID=0x6282, Rev=0x1
+devtmpfs: initialized
+pinctrl core: initialized pinctrl subsystem
+regulator-dummy: no parameters
+NET: Registered protocol family 16
+DMA: preallocated 256 KiB pool for atomic coherent allocations
+cpuidle: using governor ladder
+Feroceon L2: Enabling L2
+Feroceon L2: Cache support initialised.
+[Firmware Info]: /ocp@f1000000/ethernet-controller@72000/ethernet0-port@0: local-mac-address is not set
+[Firmware Info]: /ocp@f1000000/ethernet-controller@76000/ethernet1-port@0: local-mac-address is not set
+SCSI subsystem initialized
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+Switched to clocksource orion_clocksource
+FS-Cache: Loaded
+NET: Registered protocol family 2
+TCP established hash table entries: 1024 (order: 0, 4096 bytes)
+TCP bind hash table entries: 1024 (order: 0, 4096 bytes)
+TCP: Hash tables configured (established 1024 bind 1024)
+TCP: reno registered
+UDP hash table entries: 256 (order: 0, 4096 bytes)
+UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+NET: Registered protocol family 1
+cfg80211: Calling CRDA to update world regulatory domain
+RPC: Registered named UNIX socket transport module.
+RPC: Registered udp transport module.
+RPC: Registered tcp transport module.
+RPC: Registered tcp NFSv4.1 backchannel transport module.
+PCI: CLS 0 bytes, default 32
+futex hash table entries: 256 (order: -1, 3072 bytes)
+NFS: Registering the id_resolver key type
+Key type id_resolver registered
+Key type id_legacy registered
+nfs4filelayout_init: NFSv4 File Layout Driver Registering...
+Installing knfsd (copyright (C) 1996 okir@monad.swb.de).
+FS-Cache: Netfs 'cifs' registered for caching
+Key type cifs.spnego registered
+Key type cifs.idmap registered
+msgmni has been set to 238
+io scheduler noop registered
+io scheduler deadline registered (default)
+kirkwood-pinctrl f1010000.pin-controller: registered pinctrl driver
+irq: Cannot allocate irq_descs @ IRQ31, assuming pre-allocated
+irq: Cannot allocate irq_descs @ IRQ63, assuming pre-allocated
+mvebu-pcie mbus:pcie-controller: PCI host bridge to bus 0000:00
+pci_bus 0000:00: root bus resource [io  0x1000-0xfffff]
+pci_bus 0000:00: root bus resource [mem 0xe0000000-0xefffffff]
+pci_bus 0000:00: root bus resource [bus 00-ff]
+pci 0000:00:01.0: [11ab:6282] type 01 class 0x060400
+pci 0000:00:02.0: [11ab:6282] type 01 class 0x060400
+PCI: bus0: Fast back to back transfers disabled
+pci 0000:00:01.0: bridge configuration invalid ([bus 00-00]), reconfiguring
+pci 0000:00:02.0: bridge configuration invalid ([bus 00-00]), reconfiguring
+pci 0000:01:00.0: [11ab:2a41] type 00 class 0x020000
+pci 0000:01:00.0: reg 0x10: [mem 0x90000000-0x9000ffff 64bit]
+pci 0000:01:00.0: reg 0x18: [mem 0x90010000-0x9001ffff 64bit]
+PCI: bus1: Fast back to back transfers disabled
+pci_bus 0000:01: busn_res: [bus 01-ff] end is updated to 01
+pci 0000:02:00.0: [11ab:2a42] type 00 class 0x020000
+pci 0000:02:00.0: reg 0x10: [mem 0x98000000-0x9800ffff 64bit]
+pci 0000:02:00.0: reg 0x18: [mem 0x98010000-0x9801ffff 64bit]
+PCI: bus2: Fast back to back transfers disabled
+pci_bus 0000:02: busn_res: [bus 02-ff] end is updated to 02
+pci 0000:00:01.0: BAR 8: assigned [mem 0xe0000000-0xe00fffff]
+pci 0000:00:02.0: BAR 8: assigned [mem 0xe0100000-0xe01fffff]
+pci 0000:01:00.0: BAR 0: assigned [mem 0xe0000000-0xe000ffff 64bit]
+pci 0000:01:00.0: BAR 2: assigned [mem 0xe0010000-0xe001ffff 64bit]
+pci 0000:00:01.0: PCI bridge to [bus 01]
+pci 0000:00:01.0:   bridge window [mem 0xe0000000-0xe00fffff]
+pci 0000:02:00.0: BAR 0: assigned [mem 0xe0100000-0xe010ffff 64bit]
+pci 0000:02:00.0: BAR 2: assigned [mem 0xe0110000-0xe011ffff 64bit]
+pci 0000:00:02.0: PCI bridge to [bus 02]
+pci 0000:00:02.0:   bridge window [mem 0xe0100000-0xe01fffff]
+Serial: 8250/16550 driver, 2 ports, IRQ sharing disabled
+console [ttyS0] disabled
+of_serial f1012000.serial: ttyS0 at MMIO 0xf1012000 (irq = 26, base_baud = 12500000) is a 16550A
+console [ttyS0] enabled
+nand: device found, Manufacturer ID: 0xad, Chip ID: 0xf1
+nand: Hynix H27U1G8F2BTR-BC
+nand: 128MiB, SLC, page size: 2048, OOB size: 64
+Scanning device for bad blocks
+6 ofpart partitions found on MTD device orion_nand
+Creating 6 MTD partitions on "orion_nand":
+0x000000000000-0x000000080000 : "u-boot"
+0x000000080000-0x0000000a0000 : "u_env"
+0x0000000a0000-0x0000000c0000 : "s_env"
+0x000000200000-0x000001c00000 : "kernel"
+0x000001c00000-0x000003600000 : "alt_kernel"
+0x000003600000-0x000008000000 : "syscfg"
+libphy: orion_mdio_bus: probed
+mv643xx_eth: MV-643xx 10/100/1000 ethernet driver version 1.4
+mv643xx_eth_port mv643xx_eth_port.0 eth0: port 0 with MAC address 48:f8:b3:72:be:94
+mv643xx_eth_port mv643xx_eth_port.1 eth1: port 0 with MAC address 48:f8:b3:72:be:95
+Marvell TOPDOG(R) 802.11 Wireless Network Driver version 0.13
+pci 0000:00:01.0: enabling device (0140 -> 0142)
+pci 0000:00:02.0: enabling device (0140 -> 0142)
+ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+ehci-pci: EHCI PCI platform driver
+ehci-orion: EHCI orion driver
+orion-ehci f1050000.ehci: EHCI Host Controller
+orion-ehci f1050000.ehci: new USB bus registered, assigned bus number 1
+orion-ehci f1050000.ehci: irq 29, io mem 0xf1050000
+orion-ehci f1050000.ehci: USB 2.0 started, EHCI 1.00
+hub 1-0:1.0: USB hub found
+hub 1-0:1.0: 1 port detected
+usbcore: registered new interface driver usb-storage
+Netfilter messages via NETLINK v0.30.
+nfnl_acct: registering with nfnetlink.
+nf_conntrack version 0.5.0 (1911 buckets, 7644 max)
+ctnetlink v0.93: registering with nfnetlink.
+nf_tables: (c) 2007-2009 Patrick McHardy <kaber@trash.net>
+nf_tables_compat: (c) 2012 Pablo Neira Ayuso <pablo@netfilter.org>
+xt_time: kernel timezone is -0000
+ip_set: protocol 6
+IPVS: Registered protocols (TCP, UDP, SCTP, AH, ESP)
+IPVS: Connection hash table configured (size=4096, memory=32Kbytes)
+IPVS: Each connection entry needs 192 bytes at least
+IPVS: Creating netns size=1136 id=0
+IPVS: ipvs loaded.
+IPVS: [rr] scheduler registered.
+IPVS: [wrr] scheduler registered.
+IPVS: [lc] scheduler registered.
+IPVS: [wlc] scheduler registered.
+IPVS: [fo] scheduler registered.
+IPVS: [lblc] scheduler registered.
+IPVS: [lblcr] scheduler registered.
+IPVS: [dh] scheduler registered.
+IPVS: [sh] scheduler registered.
+IPVS: [sed] scheduler registered.
+IPVS: [nq] scheduler registered.
+IPVS: ftp: loaded support on port[0] = 21
+IPVS: [sip] pe registered.
+ip_tables: (C) 2000-2006 Netfilter Core Team
+ipt_CLUSTERIP: ClusterIP Version 0.8 loaded successfully
+arp_tables: (C) 2002 David S. Miller
+TCP: cubic registered
+TCP: dctcp registered
+NET: Registered protocol family 10
+mip6: Mobile IPv6
+ip6_tables: (C) 2000-2006 Netfilter Core Team
+sit: IPv6 over IPv4 tunneling driver
+ip6_gre: GRE over IPv6 tunneling driver
+NET: Registered protocol family 17
+bridge: automatic filtering via arp/ip/ip6tables has been deprecated. Update your scripts to load br_netfilter if you need this.
+Bridge firewalling registered
+Ebtables v2.0 registered
+8021q: 802.1Q VLAN Support v1.8
+DCCP: Activated CCID 2 (TCP-like)
+DCCP: Activated CCID 3 (TCP-Friendly Rate Control)
+Key type dns_resolver registered
+Key type ceph registered
+libceph: loaded (mon/osd proto 15/24)
+drivers/rtc/hctosys.c: unable to open rtc device (rtc0)
+geneve: Geneve driver
+Waiting 10 sec before mounting root device...
+ieee80211 phy0: Command RF_ANTENNA error 0x2
+ieee80211 phy0: failed to set # of RX antennas
+ieee80211 phy0: Command RF_ANTENNA error 0x2
+ieee80211 phy0: failed to set # of TX antennas
+ieee80211 phy0: 88w8366 v48, 48f8b372be96, STA firmware 4.1.0.3
+ieee80211 phy1: Command RF_ANTENNA error 0x2
+ieee80211 phy1: failed to set # of RX antennas
+ieee80211 phy1: Command RF_ANTENNA error 0x2
+ieee80211 phy1: failed to set # of TX antennas
+ieee80211 phy1: 88w8366 v48, 48f8b372be98, STA firmware 4.1.0.3
+usb 1-1: new high-speed USB device number 2 using orion-ehci
+usb-storage 1-1:1.0: USB Mass Storage device detected
+scsi host0: usb-storage 1-1:1.0
+scsi 0:0:0:0: Direct-Access     USB      DISK 2.0         1219 PQ: 0 ANSI: 0 CCS
+sd 0:0:0:0: [sda] 1957888 512-byte logical blocks: (1.00 GB/956 MiB)
+sd 0:0:0:0: [sda] Write Protect is off
+sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+sd 0:0:0:0: [sda] No Caching mode page found
+sd 0:0:0:0: [sda] Assuming drive cache: write through
+ sda: sda1
+sd 0:0:0:0: [sda] Attached SCSI removable disk
+EXT4-fs (sda1): couldn't mount as ext3 due to feature incompatibilities
+EXT4-fs (sda1): couldn't mount as ext2 due to feature incompatibilities
+EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
+VFS: Mounted root (ext4 filesystem) readonly on device 8:1.
+Freeing unused kernel memory: 188K (c06b9000 - c06e8000)
+systemd-udevd[156]: starting version 215
+random: udevd urandom read with 62 bits of entropy available
+cfg80211: Calling CRDA to update world regulatory domain
+cfg80211: World regulatory domain updated:
+cfg80211:  DFS Master region: unset
+cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+cfg80211: Calling CRDA for country: US
+cfg80211: Regulatory domain changed to country: US
+cfg80211:  DFS Master region: unset
+cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 3000 mBm), (N/A)
+cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz), (N/A, 1700 mBm), (N/A)
+cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz), (N/A, 2300 mBm), (0 s)
+cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 3000 mBm), (N/A)
+cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 4000 mBm), (N/A)
+EXT4-fs (sda1): re-mounted. Opts: (null)
+random: nonblocking pool is initialized
+mv643xx_eth_port mv643xx_eth_port.0 eth0: link up, 1000 Mb/s, full duplex, flow control disabled
+mv643xx_eth_port mv643xx_eth_port.1 eth1: link up, 1000 Mb/s, full duplex, flow control disabled
+IPv6: ADDRCONF(NETDEV_UP): wlan0: link is not ready
+IPv6: ADDRCONF(NETDEV_UP): wlan1: link is not ready
+ieee80211 phy0: Command 0x8206 error 0x2
+0000:01:00.0: unable to load firmware helper image
+ieee80211 phy0: Cannot start firmware
+ieee80211 phy0: Trying to reload the firmware again
+ieee80211 phy0: Command MAC_MULTICAST_ADR timeout after 10000 ms
+ieee80211 phy0: 88w8366 v7, 48f8b372be96, AP firmware 5.2.8.17
+IPv6: ADDRCONF(NETDEV_UP): wlan0: link is not ready
+ieee80211 phy0: dropped TX frame since radio disabled
+IPv6: ADDRCONF(NETDEV_CHANGE): wlan0: link becomes ready
