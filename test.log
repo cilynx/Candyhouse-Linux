@@ -1,4 +1,4 @@
-Linux version 3.18.5-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 10:33:56 PDT 2015
+Linux version 3.18.6-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 10:43:27 PDT 2015
 
 eth0      Link encap:Ethernet  HWaddr 48:f8:b3:72:be:94  
           inet addr:10.2.0.1  Bcast:10.255.255.255  Mask:255.0.0.0
@@ -14,10 +14,10 @@ eth1      Link encap:Ethernet  HWaddr 48:f8:b3:72:be:95
           inet addr:10.42.0.32  Bcast:10.42.0.255  Mask:255.255.255.0
           inet6 addr: fe80::4af8:b3ff:fe72:be95/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:75 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:86 errors:0 dropped:0 overruns:0 carrier:0
+          RX packets:132 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:149 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000 
-          RX bytes:7542 (7.3 KiB)  TX bytes:8018 (7.8 KiB)
+          RX bytes:13260 (12.9 KiB)  TX bytes:13616 (13.2 KiB)
           Interrupt:84 
 
 wlan0     Link encap:Ethernet  HWaddr 48:f8:b3:72:be:96  
@@ -125,13 +125,13 @@ bootcmd=run nandboot
 
 
 Booting Linux on physical CPU 0x0
-Linux version 3.18.5-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 10:33:56 PDT 2015
+Linux version 3.18.6-candyhouse (rcw@initiative) (gcc version 4.8.3 20140820 (release) (4.8.3-9+11) ) #1 Thu Mar 26 10:43:27 PDT 2015
 CPU: Feroceon 88FR131 [56251311] revision 1 (ARMv5TE), cr=0005397f
 CPU: VIVT data cache, VIVT instruction cache
 Machine model: Linksys Candyhouse (E4200v2 / EA4500)
 Memory policy: Data cache writeback
 On node 0 totalpages: 32768
-free_area_init_node: node 0, pgdat c071e4c4, node_mem_map c7efb000
+free_area_init_node: node 0, pgdat c071e4e4, node_mem_map c7efb000
   Normal zone: 256 pages used for memmap
   Normal zone: 0 pages reserved
   Normal zone: 32768 pages, LIFO batch:7
@@ -151,8 +151,8 @@ Virtual kernel memory layout:
     modules : 0xbf000000 - 0xc0000000   (  16 MB)
       .text : 0xc0008000 - 0xc06b8dac   (6852 kB)
       .init : 0xc06b9000 - 0xc06e8000   ( 188 kB)
-      .data : 0xc06e8000 - 0xc071ed00   ( 220 kB)
-       .bss : 0xc071ed00 - 0xc075708c   ( 225 kB)
+      .data : 0xc06e8000 - 0xc071ed20   ( 220 kB)
+       .bss : 0xc071ed20 - 0xc07570ac   ( 225 kB)
 NR_IRQS:16 nr_irqs:16 16
 sched_clock: 32 bits at 200MHz, resolution 5ns, wraps every 21474836475ns
 Calibrating delay loop... 1196.85 BogoMIPS (lpj=5984256)
@@ -160,7 +160,7 @@ pid_max: default: 32768 minimum: 301
 Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
 Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
 CPU: Testing write buffer coherency: ok
-Setting up static identity map for 0x5956a0 - 0x5956dc
+Setting up static identity map for 0x5956e0 - 0x59571c
 mvebu-soc-id: MVEBU SoC ID=0x6282, Rev=0x1
 devtmpfs: initialized
 pinctrl core: initialized pinctrl subsystem
@@ -345,7 +345,7 @@ EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
 VFS: Mounted root (ext4 filesystem) readonly on device 8:1.
 Freeing unused kernel memory: 188K (c06b9000 - c06e8000)
 systemd-udevd[156]: starting version 215
-random: udevd urandom read with 61 bits of entropy available
+random: udevd urandom read with 62 bits of entropy available
 cfg80211: Calling CRDA to update world regulatory domain
 cfg80211: Calling CRDA to update world regulatory domain
 cfg80211: World regulatory domain updated:
@@ -379,8 +379,5 @@ ieee80211 phy0: Trying to reload the firmware again
 ieee80211 phy0: Command MAC_MULTICAST_ADR timeout after 10000 ms
 ieee80211 phy0: 88w8366 v7, 48f8b372be96, AP firmware 5.2.8.17
 IPv6: ADDRCONF(NETDEV_UP): wlan0: link is not ready
-ieee80211 phy0: dropped TX frame since radio disabled
-ieee80211 phy0: dropped TX frame since radio disabled
-ieee80211 phy0: dropped TX frame since radio disabled
 ieee80211 phy0: dropped TX frame since radio disabled
 IPv6: ADDRCONF(NETDEV_CHANGE): wlan0: link becomes ready
