@@ -24,7 +24,7 @@ all::	.built
 	cd $(LINUX) && make -j4 ARCH=arm LOADADDR=0x00008000 uImage
 	cd $(LINUX) && make ARCH=arm dtbs
 	cat $(LINUX)/arch/arm/boot/zImage $(LINUX)/arch/arm/boot/dts/kirkwood-candyhouse.dtb > /tmp/zImage+kirkwood-candyhouse.dtb 
-	mkimage -A arm -O linux -T kernel -C none -a 0x00008000 -e 0x00008000 -n $(LINUX) -d /tmp/zImage+kirkwood-candyhouse.dtb uImage-$(VERSION)-candyhouse
+	mkimage -A arm -O linux -T kernel -C none -a 0x00008000 -e 0x00008000 -n $(LINUX) -d /tmp/zImage+kirkwood-candyhouse.dtb uImage-$(VERSION)-candyhouse-openwrt
 	touch $@
 
 clean::
