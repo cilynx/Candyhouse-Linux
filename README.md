@@ -24,6 +24,10 @@ $ make openwrt
 
 The included [Makefile](Makefile) will clone OpenWRT, patch it as appropriate, and build SSAs for the EA4500 / E4200v2.  Autobuilding SSAs for the EA3500 is a WIP.
 
+For more info and disucssion about OpenWRT on Candyhouse routers, please visit:
+
+[http://www.wolfteck.com/projects/candyhouse/openwrt/](http://www.wolfteck.com/projects/candyhouse/openwrt/)
+
 # Building / Installing Modules
 
 No need.  All required functions are built into the kernel image.  No more mounting your router FS to you build box!
