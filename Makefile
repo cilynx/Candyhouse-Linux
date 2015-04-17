@@ -22,18 +22,18 @@ usb:: .usb_built
 	touch $@
 
 .usb_patched: .usb_extracted
-	cd $(LINUX) && patch -p1 < ../patches/candyhouse.patch > ../.patchlog
+	cd $(LINUX) && patch -p1 < ../patches/usb.patch > ../.usb_patchlog
 	touch $@
 
 .usb_configured: .usb_patched
-	cd $(LINUX) && cp -f ../config/linux.config .config && make oldconfig ARCH=arm
+	cd $(LINUX) && cp -f ../config/usb.config .config && make oldconfig ARCH=arm
 	touch $@
 
 .usb_built: .usb_configured
 	cd $(LINUX) && make -j4 ARCH=arm LOADADDR=0x00008000 uImage
 	cd $(LINUX) && make ARCH=arm dtbs
 	cat $(LINUX)/arch/arm/boot/zImage $(LINUX)/arch/arm/boot/dts/kirkwood-candyhouse.dtb > /tmp/zImage+kirkwood-candyhouse.dtb 
-	mkimage -A arm -O linux -T kernel -C none -a 0x00008000 -e 0x00008000 -n $(LINUX) -d /tmp/zImage+kirkwood-candyhouse.dtb uImage-$(VERSION)-candyhouse-openwrt
+	mkimage -A arm -O linux -T kernel -C none -a 0x00008000 -e 0x00008000 -n $(LINUX) -d /tmp/zImage+kirkwood-candyhouse.dtb uImage-$(VERSION)-ea4500
 	touch $@
 
 openwrt:: openwrt4500 
@@ -77,4 +77,4 @@ openwrt-kirkwood-ea4500-alt.ssa: .openwrt4500-alt_built
 	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea4500.ssa openwrt-kirkwood-ea4500-alt.ssa 
 
 clean::
-	rm -rf .fetched $(LINUX) $(LINUX).tar.xz .extracted .patched .patchlog .configured .built uImage-$(VERSION)-candyhouse openwrt .openwrt* *.ssa
+	rm -rf .fetched $(LINUX) $(LINUX).tar.xz .extracted .patched .patchlog .configured .built uImage* openwrt .openwrt* *.ssa test.log
