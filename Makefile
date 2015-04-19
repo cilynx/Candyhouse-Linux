@@ -26,7 +26,7 @@ usb:: .usb_built
 	touch $@
 
 .usb_configured: .usb_patched
-	cd $(LINUX) && cp -f ../config/usb.config .config && make oldconfig ARCH=arm
+	cd $(LINUX) && make oldconfig ARCH=arm
 	touch $@
 
 .usb_built: .usb_configured
@@ -134,5 +134,18 @@ openwrt-kirkwood-ea4500-pri.ssa: .openwrt4500-pri_built
 openwrt-kirkwood-ea4500-alt.ssa: .openwrt4500-alt_built
 	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea4500.ssa openwrt-kirkwood-ea4500-alt.ssa 
 
-clean::
-	rm -rf .fetched $(LINUX) $(LINUX).tar.xz .extracted .patched .patchlog .configured .built uImage* openwrt .openwrt* *.ssa test.log
+usb-clean::
+	rm -rf .usb_extracted .usb_patched .usb_configured .usb_built $(LINUX) uImage-$(LINUX)-ea4500
+
+usb-distclean: usb-clean
+	rm -rf $(LINUX).tar.xz
+
+openwrt-clean::
+	rm -rf *.ssa
+
+openwrt-distclean: openwrt-clean
+	rm -rf openwrt/
+
+clean: usb-clean openwrt-clean
+
+distclean: usb-distclean openwrt-distclean
