@@ -22,7 +22,17 @@ For more info and discussion about making these kernels work in practice, check 
 $ make openwrt
 ```
 
-The included [Makefile](Makefile) will clone OpenWRT, patch it as appropriate, and build SSAs for the EA4500 / E4200v2.  Autobuilding SSAs for the EA3500 is a WIP.
+The included [Makefile](Makefile) will clone OpenWRT, patch it as appropriate, and build SSAs for the EA4500 / E4200v2 / EA3500.
+
+You can also limit the build to your desired platform:
+
+```bash
+$ make openwrt3500
+```
+
+```bash
+$ make openwrt4500
+```
 
 For more info and disucssion about OpenWRT on Candyhouse routers, please visit:
 
