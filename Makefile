@@ -52,55 +52,103 @@ openwrt4500:: openwrt-kirkwood-ea4500-pri.ssa openwrt-kirkwood-ea4500-alt.ssa
 
 .openwrt3500-pri_patched: .openwrt_luci
 ifneq ("$(wildcard .openwrt3500-alt_patched)","")
-	cd openwrt && patch -R -p1 < ../patches/openwrt3500-alt.patch > ../.openwrt3500_unpatchlog && rm ../.openwrt3500-alt_patched
-endif
-ifneq ("$(wildcard .openwrt4500-pri_patched)","")
-	cd openwrt && patch -R -p1 < ../patches/openwrt4500-pri.patch > ../.openwrt4500_unpatchlog && rm ../.openwrt4500-pri_patched
-endif
-ifneq ("$(wildcard .openwrt4500-alt_patched)","")
-	cd openwrt && patch -R -p1 < ../patches/openwrt4500-alt.patch > ../.openwrt4500_unpatchlog && rm ../.openwrt4500-alt_patched
-endif
-	cd openwrt && patch -p1 < ../patches/openwrt3500-pri.patch > ../.openwrt3500_patchlog
+	cd openwrt && patch -p1 -R < ../patches/openwrt-alt.patch 
+	rm .openwrt3500-alt_patched
+	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch 
 	touch $@
+else ifneq ("$(wildcard .openwrt4500-pri_patched)","")
+	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch 
+	rm .openwrt4500-pri_patched
+	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch 
+	touch $@
+else ifneq ("$(wildcard .openwrt4500-alt_patched)","")
+	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch 
+	cd openwrt && patch -p1 -R < ../patches/openwrt-alt.patch 
+	rm .openwrt4500-alt_patched
+	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch 
+	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch 
+	touch $@
+else
+	cd openwrt && patch -p1 < ../patches/openwrt.patch
+	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch 
+	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch 
+	touch $@
+endif
 
 .openwrt3500-alt_patched: .openwrt_luci
 ifneq ("$(wildcard .openwrt3500-pri_patched)","")
-	cd openwrt && patch -R -p1 < ../patches/openwrt3500-pri.patch > ../.openwrt3500_unpatchlog && rm ../.openwrt3500-pri_patched
-endif
-ifneq ("$(wildcard .openwrt4500-pri_patched)","")
-	cd openwrt && patch -R -p1 < ../patches/openwrt4500-pri.patch > ../.openwrt4500_unpatchlog && rm ../.openwrt4500-pri_patched
-endif
-ifneq ("$(wildcard .openwrt4500-alt_patched)","")
-	cd openwrt && patch -R -p1 < ../patches/openwrt4500-alt.patch > ../.openwrt4500_unpatchlog && rm ../.openwrt4500-alt_patched
-endif
-	cd openwrt && patch -p1 < ../patches/openwrt3500-alt.patch > ../.openwrt3500_patchlog
+	cd openwrt && patch -p1 -R < ../patches/openwrt-pri.patch 
+	rm .openwrt3500-pri_patched
+	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch 
 	touch $@
+else ifneq ("$(wildcard .openwrt4500-pri_patched)","")
+	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch 
+	cd openwrt && patch -p1 -R < ../patches/openwrt-pri.patch 
+	rm .openwrt4500-pri_patched
+	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch 
+	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch 
+	touch $@
+else ifneq ("$(wildcard .openwrt4500-alt_patched)","")
+	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch 
+	rm .openwrt4500-alt_patched
+	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch 
+	touch $@
+else	
+	cd openwrt && patch -p1 < ../patches/openwrt.patch
+	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch 
+	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch 
+	touch $@
+endif
 
 .openwrt4500-pri_patched: .openwrt_luci
 ifneq ("$(wildcard .openwrt3500-pri_patched)","")
-	cd openwrt && patch -R -p1 < ../patches/openwrt3500-pri.patch > ../.openwrt3500_unpatchlog && rm ../.openwrt3500-pri_patched
-endif
-ifneq ("$(wildcard .openwrt3500-alt_patched)","")
-	cd openwrt && patch -R -p1 < ../patches/openwrt3500-alt.patch > ../.openwrt3500_unpatchlog && rm ../.openwrt3500-alt_patched
-endif
-ifneq ("$(wildcard .openwrt4500-alt_patched)","")
-	cd openwrt && patch -R -p1 < ../patches/openwrt4500-alt.patch > ../.openwrt4500_unpatchlog && rm ../.openwrt4500-alt_patched
-endif
-	cd openwrt && patch -p1 < ../patches/openwrt4500-pri.patch > ../.openwrt4500_patchlog
+	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch 
+	rm .openwrt3500-pri_patched
+	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
 	touch $@
+else ifneq ("$(wildcard .openwrt3500-alt_patched)","")
+	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
+	cd openwrt && patch -p1 -R < ../patches/openwrt-alt.patch
+	rm .openwrt3500-alt_patched
+	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
+	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch 
+	touch $@
+else ifneq ("$(wildcard .openwrt4500-alt_patched)","")
+	cd openwrt && patch -p1 -R < ../patches/openwrt-alt.patch
+	rm .openwrt4500-alt_patched
+	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch 
+	touch $@
+else
+	cd openwrt && patch -p1 < ../patches/openwrt.patch
+	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
+	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch
+	touch $@
+endif
 
 .openwrt4500-alt_patched: .openwrt_luci
 ifneq ("$(wildcard .openwrt3500-pri_patched)","")
-	cd openwrt && patch -R -p1 < ../patches/openwrt3500-pri.patch > ../.openwrt3500_unpatchlog && rm ../.openwrt3500-pri_patched
-endif
-ifneq ("$(wildcard .openwrt3500-alt_patched)","")
-	cd openwrt && patch -R -p1 < ../patches/openwrt3500-alt.patch > ../.openwrt3500_unpatchlog && rm ../.openwrt3500-alt_patched
-endif
-ifneq ("$(wildcard .openwrt4500-pri_patched)","")
-	cd openwrt && patch -R -p1 < ../patches/openwrt4500-pri.patch > ../.openwrt4500_unpatchlog && rm ../.openwrt4500-pri_patched
-endif
-	cd openwrt && patch -p1 < ../patches/openwrt4500-alt.patch > ../.openwrt4500_patchlog
+	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
+	cd openwrt && patch -p1 -R < ../patches/openwrt-pri.patch
+	rm .openwrt3500-pri_patched
+	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
+	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch
 	touch $@
+else ifneq ("$(wildcard .openwrt3500-alt_patched)","")
+	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
+	rm .openwrt3500-alt_patched 
+	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
+	touch $@
+else ifneq ("$(wildcard .openwrt4500-pri_patched)","")
+	cd openwrt && patch -p1 -R < ../patches/openwrt-pri.patch 
+	rm .openwrt4500-pri_patched 
+	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch 
+	touch $@
+else
+	cd openwrt && patch -p1 < ../patches/openwrt.patch 
+	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch 
+	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch 
+	touch $@
+endif
 
 .openwrt3500-pri_built: .openwrt3500-pri_patched
 	cd openwrt && make target/linux/clean
@@ -138,13 +186,13 @@ usb-clean::
 	rm -rf .usb_extracted .usb_patched .usb_configured .usb_built $(LINUX) uImage-$(VERSION)-ea4500
 
 usb-distclean: usb-clean
-	rm -rf $(LINUX).tar.xz .usb_fetched
+	rm -rf $(LINUX).tar.xz .usb*
 
 openwrt-clean::
 	rm -rf *.ssa
 
 openwrt-distclean: openwrt-clean
-	rm -rf openwrt/
+	rm -rf openwrt/ .openwrt*
 
 clean: usb-clean openwrt-clean
 

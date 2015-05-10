@@ -1,0 +1,75 @@
+--- a/.config
++++ b/.config
+@@ -48,6 +48,8 @@
+ # CONFIG_TARGET_kirkwood_ICONNECT is not set
+ # CONFIG_TARGET_kirkwood_IOMEGA_IX2_200 is not set
+ # CONFIG_TARGET_kirkwood_POGOE02 is not set
++CONFIG_TARGET_kirkwood_EA3500=y
++# CONFIG_TARGET_kirkwood_EA4500 is not set
+ # CONFIG_TARGET_kirkwood_SHEEVAPLUG is not set
+ # CONFIG_TARGET_kirkwood_SHEEVAPLUGSATA is not set
+ # CONFIG_TARGET_kirkwood_GuruplugServerPlus is not set
+--- a/target/linux/kirkwood/image/Makefile
++++ a/target/linux/kirkwood/image/Makefile
+@@ -127,5 +127,8 @@
+ 	$(CP) $(KDIR)/root.ubi $(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-rootfs.ubi
+  endif
++ ifeq ($(PROFILE),EA3500)
++       $(call Image/Build/ssa)
++ endif
+ endef
+ 
+ Image/BuildKernel/Template/Generic=$(call Image/BuildKernel/Template)
+--- a/target/linux/kirkwood/patches-3.18/170-ea3500.patch
++++ b/target/linux/kirkwood/patches-3.18/170-ea3500.patch
+@@ -10,7 +10,7 @@
+  	kirkwood-guruplug-server-plus.dtb \
+ --- /dev/null
+ +++ b/arch/arm/boot/dts/kirkwood-ea3500.dts
+-@@ -0,0 +1,160 @@
++@@ -0,0 +1,180 @@
+ +/*
+ + * kirkwood-ea3500.dts - Device Tree file for Linksys EA3500
+ + *
+@@ -137,19 +137,39 @@
+ +	};
+ +
+ +	partition@80000 {
+-+		label = "u-boot environment";
+++		label = "u_env";
+ +		reg = <0x80000 0x20000>;
+ +	};
+ +
+++	partition@A0000 {
+++		label = "s_env";
+++		reg = <0xA0000 0x20000>;
+++	};
+++
+ +	partition@200000 {
+ +		label = "kernel";
+ +		reg = <0x200000 0x200000>;
+ +	};
+ +
+ +	partition@400000 {
+-+		label = "root";
+++		label = "rootfs";
+ +		reg = <0x400000 0x1200000>;
+ +	};
+++
+++	partition@1600000 {
+++		label = "alt_kernel";
+++		reg = <0x1600000 0x200000>;
+++	};
+++
+++	partition@1800000 {
+++		label = "alt_rootfs";
+++		reg = <0x1800000 0x1200000>;
+++	};
+++
+++	partition@2a00000 {
+++	   	label = "syscfg";
+++		reg = <0x2a00000 0x1600000>;
+++	};
+ +};
+ +
+ +&mdio {

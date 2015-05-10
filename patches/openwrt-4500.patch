@@ -1,0 +1,75 @@
+--- a/.config
++++ b/.config
+@@ -48,6 +48,8 @@
+ # CONFIG_TARGET_kirkwood_ICONNECT is not set
+ # CONFIG_TARGET_kirkwood_IOMEGA_IX2_200 is not set
+ # CONFIG_TARGET_kirkwood_POGOE02 is not set
++# CONFIG_TARGET_kirkwood_EA3500 is not set
++CONFIG_TARGET_kirkwood_EA4500=y
+ # CONFIG_TARGET_kirkwood_SHEEVAPLUG is not set
+ # CONFIG_TARGET_kirkwood_SHEEVAPLUGSATA is not set
+ # CONFIG_TARGET_kirkwood_GuruplugServerPlus is not set
+--- a/target/linux/kirkwood/image/Makefile
++++ a/target/linux/kirkwood/image/Makefile
+@@ -127,5 +127,8 @@
+ 	$(CP) $(KDIR)/root.ubi $(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-rootfs.ubi
+  endif
++ ifeq ($(PROFILE),EA4500)
++       $(call Image/Build/ssa)
++ endif
+ endef
+
+ Image/BuildKernel/Template/Generic=$(call Image/BuildKernel/Template)
+--- a/target/linux/kirkwood/patches-3.18/160-ea4500.patch
++++ b/target/linux/kirkwood/patches-3.18/160-ea4500.patch
+@@ -10,7 +10,7 @@
+  	kirkwood-ib62x0.dtb \
+ --- /dev/null
+ +++ b/arch/arm/boot/dts/kirkwood-ea4500.dts
+-@@ -0,0 +1,167 @@
++@@ -0,0 +1,187 @@
+ +/*
+ + * kirkwood-ea4500.dts - Device Tree file for Linksys EA4500
+ + *
+@@ -144,18 +144,38 @@
+ +	};
+ +
+ +	partition@80000 {
+-+		label = "u-boot environment";
+++		label = "u_env";
+ +		reg = <0x80000 0x20000>;
+ +	};
+ +
+++	partition@A0000 {
+++		label = "s_env";
+++		reg = <0xA0000 0x20000>;
+++	};
+++
+ +	partition@200000 {
+ +		label = "kernel";
+ +		reg = <0x200000 0x200000>;
+ +	};
+ +
+ +	partition@400000 {
+-+		label = "root";
+-+		reg = <0x400000 0x1c00000>;
+++		label = "rootfs";
+++		reg = <0x400000 0x1800000>;
+++	};
+++
+++	partition@1C00000 {
+++		label = "alt_kernel";
+++		reg = <0x1C00000 0x200000>;
+++	};
+++
+++	partition@1E00000 {
+++		label = "alt_rootfs";
+++		reg = <0x1E00000 0x1800000>;
+++	};
+++
+++	partition@3600000 {
+++		label = "syscfg";
+++		reg = <0x3600000 0x4A00000>;
+ +	};
+ +};
+ +

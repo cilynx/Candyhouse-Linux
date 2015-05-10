@@ -1,0 +1,14 @@
+--- a/target/linux/kirkwood/config-3.18
++++ b/target/linux/kirkwood/config-3.18
+@@ -47,8 +47,9 @@ CONFIG_CLKDEV_LOOKUP=y
+ CONFIG_CLKSRC_MMIO=y
+ CONFIG_CLKSRC_OF=y
+ CONFIG_CLONE_BACKWARDS=y
+-CONFIG_CMDLINE="rootdelay=1 root=/dev/mmcblk0p1 noinitrd console=ttyS0,115200"
+-CONFIG_CMDLINE_FROM_BOOTLOADER=y
++CONFIG_CMDLINE="ubi.mtd=4 root=ubi0:rootfs rootfstype=ubifs noinitrd console=ttyS0,115200"
++CONFIG_CMDLINE_FORCE=y
++# CONFIG_CMDLINE_FROM_BOOTLOADER is not set
+ CONFIG_COMMON_CLK=y
+ CONFIG_CPU_32v5=y
+ CONFIG_CPU_ABRT_EV5T=y
