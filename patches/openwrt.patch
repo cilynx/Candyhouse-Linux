@@ -18,15 +18,15 @@ index ede7cb3..aa5f7f3 100644
 
 +define Image/Build/ssa
 +
-+       if [ `stat -c %s $(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-uImage` -gt $(EA4500_KERNEL_MTD_SIZE) ] ; then \
-+               echo "$(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-uImage \>2M" >&2; \
-+               exit 1; \
-+       else \
-+               ( \
-+                       dd if=$(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-uImage bs=$(EA4500_KERNEL_MTD_SIZE) conv=sync; \
-+                       dd if=$(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-rootfs.ubi; \
-+               ) > $(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name).ssa; \
-+       fi
++	if [ `stat -c %s $(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-uImage` -gt $(EA4500_KERNEL_MTD_SIZE) ] ; then \
++		echo "$(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-uImage \>2M" >&2; \
++		exit 1; \
++	else \
++		( \
++			dd if=$(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-uImage bs=$(EA4500_KERNEL_MTD_SIZE) conv=sync; \
++			dd if=$(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-rootfs.ubi; \
++		) > $(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name).ssa; \
++	fi
 +
 +endef
 +

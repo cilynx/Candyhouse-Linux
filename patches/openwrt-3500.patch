@@ -15,7 +15,7 @@
  	$(CP) $(KDIR)/root.ubi $(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-rootfs.ubi
   endif
 + ifeq ($(PROFILE),EA3500)
-+       $(call Image/Build/ssa)
++	$(call Image/Build/ssa)
 + endif
  endef
  
