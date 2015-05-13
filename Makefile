@@ -50,136 +50,48 @@ openwrt4500:: openwrt-kirkwood-ea4500-pri.ssa openwrt-kirkwood-ea4500-alt.ssa
 	cd openwrt && ./scripts/feeds update packages luci && ./scripts/feeds install -a -p luci
 	touch $@
 
-.openwrt3500-pri_patched: .openwrt_luci
-ifneq ("$(wildcard .openwrt3500-alt_patched)","")
-	cd openwrt && patch -p1 -R < ../patches/openwrt-alt.patch 
-	rm .openwrt3500-alt_patched
-	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch 
-	touch $@
-else ifneq ("$(wildcard .openwrt4500-pri_patched)","")
-	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch 
-	rm .openwrt4500-pri_patched
-	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch 
-	touch $@
-else ifneq ("$(wildcard .openwrt4500-alt_patched)","")
-	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch 
-	cd openwrt && patch -p1 -R < ../patches/openwrt-alt.patch 
-	rm .openwrt4500-alt_patched
-	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch 
-	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch 
-	touch $@
-else
+openwrt-kirkwood-ea3500-pri.ssa: .openwrt_luci
 	cd openwrt && patch -p1 < ../patches/openwrt.patch
-	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch 
-	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch 
-	touch $@
-endif
+	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch
+	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch
+	cd openwrt && make target/linux/clean
+	cd openwrt && make oldconfig && make -j4
+	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
+	cd openwrt && patch -p1 -R < ../patches/openwrt-pri.patch
+	cd openwrt && patch -p1 -R < ../patches/openwrt.patch
+	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea3500.ssa openwrt-kirkwood-ea3500-pri.ssa
 
-.openwrt3500-alt_patched: .openwrt_luci
-ifneq ("$(wildcard .openwrt3500-pri_patched)","")
-	cd openwrt && patch -p1 -R < ../patches/openwrt-pri.patch 
-	rm .openwrt3500-pri_patched
-	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch 
-	touch $@
-else ifneq ("$(wildcard .openwrt4500-pri_patched)","")
-	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch 
-	cd openwrt && patch -p1 -R < ../patches/openwrt-pri.patch 
-	rm .openwrt4500-pri_patched
-	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch 
-	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch 
-	touch $@
-else ifneq ("$(wildcard .openwrt4500-alt_patched)","")
-	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch 
-	rm .openwrt4500-alt_patched
-	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch 
-	touch $@
-else	
+openwrt-kirkwood-ea3500-alt.ssa: .openwrt_luci
 	cd openwrt && patch -p1 < ../patches/openwrt.patch
-	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch 
-	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch 
-	touch $@
-endif
-
-.openwrt4500-pri_patched: .openwrt_luci
-ifneq ("$(wildcard .openwrt3500-pri_patched)","")
-	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch 
-	rm .openwrt3500-pri_patched
-	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
-	touch $@
-else ifneq ("$(wildcard .openwrt3500-alt_patched)","")
+	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch
+	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch
+	cd openwrt && make target/linux/clean
+	cd openwrt && make oldconfig && make -j4
 	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt-alt.patch
-	rm .openwrt3500-alt_patched
-	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
-	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch 
-	touch $@
-else ifneq ("$(wildcard .openwrt4500-alt_patched)","")
-	cd openwrt && patch -p1 -R < ../patches/openwrt-alt.patch
-	rm .openwrt4500-alt_patched
-	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch 
-	touch $@
-else
+	cd openwrt && patch -p1 -R < ../patches/openwrt.patch
+	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea3500.ssa openwrt-kirkwood-ea3500-alt.ssa
+
+openwrt-kirkwood-ea4500-pri.ssa: .openwrt_luci
 	cd openwrt && patch -p1 < ../patches/openwrt.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch
-	touch $@
-endif
-
-.openwrt4500-alt_patched: .openwrt_luci
-ifneq ("$(wildcard .openwrt3500-pri_patched)","")
-	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
+	cd openwrt && make target/linux/clean
+	cd openwrt && make oldconfig && make -j4
+	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt-pri.patch
-	rm .openwrt3500-pri_patched
-	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
-	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch
-	touch $@
-else ifneq ("$(wildcard .openwrt3500-alt_patched)","")
-	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
-	rm .openwrt3500-alt_patched 
-	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
-	touch $@
-else ifneq ("$(wildcard .openwrt4500-pri_patched)","")
-	cd openwrt && patch -p1 -R < ../patches/openwrt-pri.patch 
-	rm .openwrt4500-pri_patched 
-	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch 
-	touch $@
-else
-	cd openwrt && patch -p1 < ../patches/openwrt.patch 
-	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch 
-	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch 
-	touch $@
-endif
-
-.openwrt3500-pri_built: .openwrt3500-pri_patched
-	cd openwrt && make target/linux/clean
-	cd openwrt && make oldconfig && make -j4
-	touch $@
-
-.openwrt3500-alt_built: .openwrt3500-alt_patched
-	cd openwrt && make target/linux/clean
-	cd openwrt && make oldconfig && make -j4
-	touch $@
-
-.openwrt4500-pri_built: .openwrt4500-pri_patched
-	cd openwrt && make target/linux/clean
-	cd openwrt && make oldconfig && make -j4
-	touch $@
-
-.openwrt4500-alt_built: .openwrt4500-alt_patched
-	cd openwrt && make target/linux/clean
-	cd openwrt && make oldconfig && make -j4
-	touch $@
-
-openwrt-kirkwood-ea3500-pri.ssa: .openwrt3500-pri_built
-	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea3500.ssa openwrt-kirkwood-ea3500-pri.ssa
-
-openwrt-kirkwood-ea3500-alt.ssa: .openwrt3500-alt_built
-	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea3500.ssa openwrt-kirkwood-ea3500-alt.ssa
-
-openwrt-kirkwood-ea4500-pri.ssa: .openwrt4500-pri_built
+	cd openwrt && patch -p1 -R < ../patches/openwrt.patch
 	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea4500.ssa openwrt-kirkwood-ea4500-pri.ssa
 
-openwrt-kirkwood-ea4500-alt.ssa: .openwrt4500-alt_built
+openwrt-kirkwood-ea4500-alt.ssa: .openwrt_luci
+	cd openwrt && patch -p1 < ../patches/openwrt.patch
+	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
+	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch
+	cd openwrt && make target/linux/clean
+	cd openwrt && make oldconfig && make -j4
+	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch
+	cd openwrt && patch -p1 -R < ../patches/openwrt-alt.patch
+	cd openwrt && patch -p1 -R < ../patches/openwrt.patch
 	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea4500.ssa openwrt-kirkwood-ea4500-alt.ssa
 
 usb-clean::
@@ -197,3 +109,4 @@ openwrt-distclean: openwrt-clean
 clean: usb-clean openwrt-clean
 
 distclean: usb-distclean openwrt-distclean
+
