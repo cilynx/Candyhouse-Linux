@@ -566,7 +566,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_kmod-net-airo is not set
  # CONFIG_PACKAGE_kmod-net-hermes is not set
  # CONFIG_PACKAGE_kmod-net-hermes-pci is not set
-@@ -1927,19 +1810,29 @@
+@@ -1927,19 +1810,34 @@
  #
  # Lua
  #
@@ -587,6 +587,11 @@ index ede7cb3..aa5f7f3 100644
  #
  
  #
++# Compression
++#
++# CONFIG_PACKAGE_libbz2 is not set
++
++#
  # Filesystem
  #
 +# CONFIG_PACKAGE_libacl is not set
@@ -598,7 +603,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_libsysfs is not set
  
  #
-@@ -1954,31 +1847,63 @@
+@@ -1954,31 +1852,62 @@
  # SSL
  #
  # CONFIG_PACKAGE_libcyassl is not set
@@ -623,7 +628,6 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_libbfd is not set
  # CONFIG_PACKAGE_libblkid is not set
  CONFIG_PACKAGE_libblobmsg-json=y
-+# CONFIG_PACKAGE_libbz2 is not set
  # CONFIG_PACKAGE_libcharset is not set
  # CONFIG_PACKAGE_libconfig is not set
  # CONFIG_PACKAGE_libcurl is not set
@@ -663,7 +667,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_libmount is not set
  # CONFIG_PACKAGE_libncurses is not set
  # CONFIG_PACKAGE_libncursesw is not set
-@@ -1987,25 +1912,43 @@
+@@ -1987,25 +1916,43 @@
  # CONFIG_PACKAGE_libnetfilter-cttimeout is not set
  # CONFIG_PACKAGE_libnetfilter-log is not set
  # CONFIG_PACKAGE_libnetfilter-queue is not set
@@ -709,7 +713,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_libuclient is not set
  # CONFIG_PACKAGE_libusb-1.0 is not set
  # CONFIG_PACKAGE_libusb-compat is not set
-@@ -2013,21 +1956,243 @@
+@@ -2013,21 +1960,243 @@
  # CONFIG_PACKAGE_libustream-openssl is not set
  # CONFIG_PACKAGE_libustream-polarssl is not set
  # CONFIG_PACKAGE_libuuid is not set
@@ -741,28 +745,28 @@ index ede7cb3..aa5f7f3 100644
 +#
 +# Translations
 +#
-+# CONFIG_LUCI_LANG_uk is not set
 +# CONFIG_LUCI_LANG_hu is not set
 +# CONFIG_LUCI_LANG_pt is not set
-+# CONFIG_LUCI_LANG_ro is not set
-+# CONFIG_LUCI_LANG_en is not set
-+# CONFIG_LUCI_LANG_pl is not set
 +# CONFIG_LUCI_LANG_sk is not set
-+# CONFIG_LUCI_LANG_ru is not set
++# CONFIG_LUCI_LANG_no is not set
++# CONFIG_LUCI_LANG_en is not set
++# CONFIG_LUCI_LANG_el is not set
++# CONFIG_LUCI_LANG_uk is not set
++# CONFIG_LUCI_LANG_ja is not set
 +# CONFIG_LUCI_LANG_vi is not set
 +# CONFIG_LUCI_LANG_he is not set
-+# CONFIG_LUCI_LANG_no is not set
++# CONFIG_LUCI_LANG_ro is not set
 +# CONFIG_LUCI_LANG_ms is not set
++# CONFIG_LUCI_LANG_pl is not set
 +# CONFIG_LUCI_LANG_zh-cn is not set
 +# CONFIG_LUCI_LANG_de is not set
 +# CONFIG_LUCI_LANG_zh-tw is not set
 +# CONFIG_LUCI_LANG_tr is not set
 +# CONFIG_LUCI_LANG_sv is not set
-+# CONFIG_LUCI_LANG_ja is not set
-+# CONFIG_LUCI_LANG_el is not set
++# CONFIG_LUCI_LANG_ru is not set
++# CONFIG_LUCI_LANG_pt-br is not set
 +# CONFIG_LUCI_LANG_ca is not set
 +# CONFIG_LUCI_LANG_es is not set
-+# CONFIG_LUCI_LANG_pt-br is not set
 +# CONFIG_LUCI_LANG_cs is not set
 +# CONFIG_LUCI_LANG_fr is not set
 +# CONFIG_LUCI_LANG_it is not set
@@ -834,7 +838,7 @@ index ede7cb3..aa5f7f3 100644
 +# 5. Protocols
 +#
 +# CONFIG_PACKAGE_luci-proto-3g is not set
-+# CONFIG_PACKAGE_luci-proto-ipv6 is not set
++CONFIG_PACKAGE_luci-proto-ipv6=y
 +# CONFIG_PACKAGE_luci-proto-openconnect is not set
 +CONFIG_PACKAGE_luci-proto-ppp=y
 +# CONFIG_PACKAGE_luci-proto-relay is not set
@@ -953,7 +957,7 @@ index ede7cb3..aa5f7f3 100644
  # Firewall
  #
  # CONFIG_PACKAGE_arptables is not set
-@@ -2078,6 +2243,22 @@
+@@ -2078,6 +2247,22 @@
  # CONFIG_PACKAGE_nftables is not set
  
  #
@@ -976,7 +980,7 @@ index ede7cb3..aa5f7f3 100644
  # Linux ATM tools
  #
  # CONFIG_PACKAGE_atm-aread is not set
-@@ -2108,6 +2289,11 @@
+@@ -2108,6 +2293,11 @@
  # CONFIG_PACKAGE_br2684ctl is not set
  
  #
@@ -988,7 +992,7 @@ index ede7cb3..aa5f7f3 100644
  # Routing and Redirection
  #
  # CONFIG_PACKAGE_genl is not set
-@@ -2177,20 +2363,34 @@
+@@ -2177,20 +2367,34 @@
  # CONFIG_PACKAGE_thc-ipv6-trace6 is not set
  
  #
@@ -1024,7 +1028,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_6in4 is not set
  # CONFIG_PACKAGE_6rd is not set
  # CONFIG_PACKAGE_6to4 is not set
-@@ -2198,6 +2398,7 @@
+@@ -2198,6 +2402,7 @@
  # CONFIG_PACKAGE_chat is not set
  # CONFIG_PACKAGE_ds-lite is not set
  # CONFIG_PACKAGE_eapol-test is not set
@@ -1032,7 +1036,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_gre is not set
  # CONFIG_PACKAGE_hostapd is not set
  CONFIG_PACKAGE_hostapd-common=y
-@@ -2222,10 +2423,13 @@
+@@ -2222,10 +2427,12 @@
  CONFIG_PACKAGE_iw=y
  # CONFIG_PACKAGE_map is not set
  # CONFIG_PACKAGE_mdns is not set
@@ -1040,13 +1044,12 @@ index ede7cb3..aa5f7f3 100644
  CONFIG_PACKAGE_odhcp6c=y
  CONFIG_PACKAGE_odhcp6c_ext_cer_id=0
  CONFIG_PACKAGE_odhcpd=y
-+CONFIG_PACKAGE_odhcpd_ext_prefix_class=0
  CONFIG_PACKAGE_odhcpd_ext_cer_id=0
 +# CONFIG_PACKAGE_oping is not set
  CONFIG_PACKAGE_ppp=y
  # CONFIG_PACKAGE_ppp-mod-pppoa is not set
  CONFIG_PACKAGE_ppp-mod-pppoe=y
-@@ -2238,16 +2442,17 @@
+@@ -2238,16 +2445,17 @@
  # CONFIG_PACKAGE_rssileds is not set
  # CONFIG_PACKAGE_samba36-client is not set
  # CONFIG_PACKAGE_samba36-server is not set
@@ -1068,7 +1071,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_wpa-cli is not set
  # CONFIG_PACKAGE_wpa-supplicant is not set
  # CONFIG_WPA_SUPPLICANT_NO_TIMESTAMP_CHECK is not set
-@@ -2262,9 +2467,16 @@
+@@ -2262,9 +2470,16 @@
  # CONFIG_PACKAGE_wpad-mesh is not set
  CONFIG_PACKAGE_wpad-mini=y
  # CONFIG_PACKAGE_wpan-tools is not set
@@ -1085,8 +1088,15 @@ index ede7cb3..aa5f7f3 100644
  # Utilities
  #
  
-@@ -2275,6 +2487,8 @@
+@@ -2273,8 +2488,15 @@
  #
+ 
+ #
++# Compression
++#
++# CONFIG_PACKAGE_bzip2 is not set
++
++#
  # Filesystem
  #
 +# CONFIG_PACKAGE_acl is not set
@@ -1094,7 +1104,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_badblocks is not set
  # CONFIG_PACKAGE_debugfs is not set
  # CONFIG_PACKAGE_dumpe2fs is not set
-@@ -2282,6 +2496,8 @@
+@@ -2282,6 +2504,8 @@
  # CONFIG_PACKAGE_e2fsprogs is not set
  # CONFIG_PACKAGE_filefrag is not set
  # CONFIG_PACKAGE_fuse-utils is not set
@@ -1103,7 +1113,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_resize2fs is not set
  # CONFIG_PACKAGE_sysfsutils is not set
  # CONFIG_PACKAGE_tune2fs is not set
-@@ -2290,6 +2506,12 @@
+@@ -2290,6 +2514,12 @@
  # CONFIG_PACKAGE_xfs-mkfs is not set
  
  #
@@ -1116,7 +1126,7 @@ index ede7cb3..aa5f7f3 100644
  # Terminal
  #
  # CONFIG_PACKAGE_agetty is not set
-@@ -2298,34 +2520,51 @@
+@@ -2298,34 +2528,50 @@
  # CONFIG_PACKAGE_wall is not set
  
  #
@@ -1140,7 +1150,6 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_swap-utils is not set
  # CONFIG_PACKAGE_wipefs is not set
 +# CONFIG_PACKAGE_bash is not set
-+# CONFIG_PACKAGE_bzip2 is not set
  # CONFIG_PACKAGE_cal is not set
 +# CONFIG_PACKAGE_collectd is not set
  # CONFIG_PACKAGE_comgt is not set
@@ -1169,7 +1178,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_logger is not set
  # CONFIG_PACKAGE_look is not set
  # CONFIG_PACKAGE_losetup is not set
-@@ -2338,13 +2577,20 @@
+@@ -2338,13 +2584,20 @@
  # CONFIG_PACKAGE_ocf-crypto-headers is not set
  # CONFIG_PACKAGE_openssl-util is not set
  # CONFIG_PACKAGE_owipcalc is not set
@@ -1191,7 +1200,7 @@ index ede7cb3..aa5f7f3 100644
  CONFIG_PACKAGE_uboot-envtools=y
  # CONFIG_UBOOT_ENVTOOLS_UBI is not set
  # CONFIG_PACKAGE_ugps is not set
-@@ -2353,4 +2599,6 @@
+@@ -2353,4 +2606,6 @@
  # CONFIG_PACKAGE_usbutils is not set
  # CONFIG_PACKAGE_uuidd is not set
  # CONFIG_PACKAGE_uuidgen is not set
