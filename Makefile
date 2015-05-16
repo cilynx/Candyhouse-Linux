@@ -5,10 +5,16 @@ all::
 	@echo
 	@echo "Options:"
 	@echo
-	@echo -e "make usb\t\tBuilds a linux kernel that when flashed will boot a filesystem on a USB stick"
-	@echo -e "make openwrt\t\tBuilds pri and alt OpenWRT firmware images for EA4500 / E4200v2 and EA3500"
-	@echo -e "make openwrt4500\tBuilds pri and alt OpenWRT firmware images for EA4500 / E4200v2"
-	@echo -e "make openwrt3500\tBuilds pri and alt OpenWRT firmware images for EA3500"
+	@echo "make usb\t\tBuilds a linux kernel that when flashed will boot a filesystem on a USB stick"
+	@echo
+	@echo "make openwrt\t\tBuilds pri and alt OpenWRT firmware images for EA4500 / E4200v2 and EA3500"
+	@echo "make openwrt4500\tBuilds pri and alt OpenWRT firmware images for EA4500 / E4200v2"
+	@echo "make openwrt3500\tBuilds pri and alt OpenWRT firmware images for EA3500"
+	@echo
+	@echo "make openwrt-kirkwood-ea3500-pri.ssa \tBuilds pri OpenWRT firmware image for EA3500"
+	@echo "make openwrt-kirkwood-ea3500-alt.ssa \tBuilds alt OpenWRT firmware image for EA3500"
+	@echo "make openwrt-kirkwood-ea4500-pri.ssa \tBuilds pri OpenWRT firmware image for EA4500 / E4200v2"
+	@echo "make openwrt-kirkwood-ea4500-alt.ssa \tBuilds alt OpenWRT firmware image for EA4500 / E4200v2"
 	@echo
 
 usb:: .usb_built
