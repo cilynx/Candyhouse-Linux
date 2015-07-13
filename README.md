@@ -38,9 +38,11 @@ For more info and disucssion about OpenWRT on Candyhouse routers, please visit:
 
 [http://www.wolfteck.com/projects/candyhouse/openwrt/](http://www.wolfteck.com/projects/candyhouse/openwrt/)
 
-## Avoiding the 3-reboot-stock bug
+## Avoiding/Fixing the 3-reboot-stock bug
 
-Add your public SSH key after initial setup to the routers list, then `ssh root@192.168.1.1`. Once you're in the routers shell run `fw_setenv auto_recovery no`. This will stop the router from reverting to the stock firmware after 3 reboots. Although conversly after another 3 reboots it will switch back to OpenWRT.
+Candyhouse routers have a failed boot counter that acts as a safety mechanism. After three failed boots, the bootloader automatically stops trying to boot the failing firmware image and switches to the other partition set -- the "last known good". OpenWRT is not aware of this couter and as such does not reset it on successful boot. Thus, if you reboot OpenWRT three times, you'll find that you're back to the Cisco stock firmware. Conversly after another 3 reboots it will switch back to OpenWRT.
+
+To get around this issue, add your public SSH key after initial setup to the routers list, then `ssh root@192.168.1.1`. Once you're in the routers shell run `fw_setenv auto_recovery no`. This will stop the router from reverting to the stock firmware after 3 reboots. 
 
 # Building / Installing Modules
 
