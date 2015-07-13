@@ -38,6 +38,10 @@ For more info and disucssion about OpenWRT on Candyhouse routers, please visit:
 
 [http://www.wolfteck.com/projects/candyhouse/openwrt/](http://www.wolfteck.com/projects/candyhouse/openwrt/)
 
+## Avoiding the 3-reboot-stock bug
+
+Add your public SSH key after initial setup to the routers list, then `ssh root@192.168.1.1`. Once you're in the routers shell run `fw_setenv auto_recovery no`. This will stop the router from reverting to the stock firmware after 3 reboots. Although conversly after another 3 reboots it will switch back to OpenWRT.
+
 # Building / Installing Modules
 
 No need.  All required functions are built into the kernel image.  No more mounting your router FS to you build box!
