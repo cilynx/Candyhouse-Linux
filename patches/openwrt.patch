@@ -1,21 +1,21 @@
 diff --git a/target/linux/kirkwood/image/Makefile b/target/linux/kirkwood/image/Makefile
-index ede7cb3..aa5f7f3 100644
+index 8413a41..4f0ca82 100644
 --- a/target/linux/kirkwood/image/Makefile
 +++ b/target/linux/kirkwood/image/Makefile
 @@ -9,6 +9,9 @@ include $(INCLUDE_DIR)/image.mk
-
+ 
  NAND_BLOCKSIZE := 2048-128k
-
+ 
 +# Linksys EA4500 Kernel Partition is defined as 2M
 +EA4500_KERNEL_MTD_SIZE := 2097152
 +
  define sanitize_profile_name
  $(shell echo $(PROFILE) | tr '[:upper:]' '[:lower:]')
  endef
-@@ -104,11 +107,25 @@ define Image/Build/ubifs
+@@ -104,6 +107,20 @@ define Image/Build/ubifs
   endif
  endef
-
+ 
 +define Image/Build/ssa
 +
 +	if [ `stat -c %s $(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-uImage` -gt $(EA4500_KERNEL_MTD_SIZE) ] ; then \
@@ -31,16 +31,11 @@ index ede7cb3..aa5f7f3 100644
 +endef
 +
  define Image/Build/ubi
-
+ 
   ifneq ($($(PROFILE)_UBI_OPTS),)
- 	$(CP) $(KDIR)/root.ubi $(BIN_DIR)/$(IMG_PREFIX)-$(call sanitize_profile_name)-rootfs.ubi
-  endif
- endef
-
- Image/BuildKernel/Template/Generic=$(call Image/BuildKernel/Template)
 --- a/.config
 +++ b/.config
-@@ -9,7 +9,7 @@
+@@ -9,7 +9,7 @@ CONFIG_HAVE_DOT_CONFIG=y
  # CONFIG_TARGET_arm64 is not set
  # CONFIG_TARGET_sunxi is not set
  # CONFIG_TARGET_ath25 is not set
@@ -49,7 +44,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_TARGET_at91 is not set
  # CONFIG_TARGET_brcm2708 is not set
  # CONFIG_TARGET_bcm53xx is not set
-@@ -29,7 +29,7 @@
+@@ -29,7 +29,7 @@ CONFIG_TARGET_ar71xx=y
  # CONFIG_TARGET_lantiq is not set
  # CONFIG_TARGET_malta is not set
  # CONFIG_TARGET_mvebu is not set
@@ -58,7 +53,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_TARGET_rb532 is not set
  # CONFIG_TARGET_mcs814x is not set
  # CONFIG_TARGET_oxnas is not set
-@@ -40,160 +40,22 @@
+@@ -40,168 +40,22 @@ CONFIG_TARGET_ar71xx=y
  # CONFIG_TARGET_omap is not set
  # CONFIG_TARGET_uml is not set
  # CONFIG_TARGET_x86 is not set
@@ -77,6 +72,8 @@ index ede7cb3..aa5f7f3 100644
 -# CONFIG_TARGET_ar71xx_generic_ALL0305 is not set
 -# CONFIG_TARGET_ar71xx_generic_ALL0258N is not set
 -# CONFIG_TARGET_ar71xx_generic_ALL0315N is not set
+-# CONFIG_TARGET_ar71xx_generic_ANTMINER_S1 is not set
+-# CONFIG_TARGET_ar71xx_generic_ANTMINER_S3 is not set
 -# CONFIG_TARGET_ar71xx_generic_AP113 is not set
 -# CONFIG_TARGET_ar71xx_generic_AP121 is not set
 -# CONFIG_TARGET_ar71xx_generic_AP121MINI is not set
@@ -106,6 +103,7 @@ index ede7cb3..aa5f7f3 100644
 -# CONFIG_TARGET_ar71xx_generic_WP543 is not set
 -# CONFIG_TARGET_ar71xx_generic_WPE72 is not set
 -# CONFIG_TARGET_ar71xx_generic_WPJ344 is not set
+-# CONFIG_TARGET_ar71xx_generic_WPJ531 is not set
 -# CONFIG_TARGET_ar71xx_generic_WPJ558 is not set
 -# CONFIG_TARGET_ar71xx_generic_DHP1565A1 is not set
 -# CONFIG_TARGET_ar71xx_generic_DIR505A1 is not set
@@ -119,12 +117,15 @@ index ede7cb3..aa5f7f3 100644
 -# CONFIG_TARGET_ar71xx_generic_DIR825C1 is not set
 -# CONFIG_TARGET_ar71xx_generic_DIR835A1 is not set
 -# CONFIG_TARGET_ar71xx_generic_DGL5500A1 is not set
+-# CONFIG_TARGET_ar71xx_generic_dLAN_pro_500_wp is not set
+-# CONFIG_TARGET_ar71xx_generic_dLAN_pro_1200_ac is not set
 -# CONFIG_TARGET_ar71xx_generic_DRAGINO2 is not set
 -# CONFIG_TARGET_ar71xx_generic_ELM150 is not set
 -# CONFIG_TARGET_ar71xx_generic_ELMINI is not set
 -# CONFIG_TARGET_ar71xx_generic_EAP300V2 is not set
 -# CONFIG_TARGET_ar71xx_generic_ESR900 is not set
 -# CONFIG_TARGET_ar71xx_generic_ESR1750 is not set
+-# CONFIG_TARGET_ar71xx_generic_EPG5000 is not set
 -# CONFIG_TARGET_ar71xx_generic_EWDORIN is not set
 -# CONFIG_TARGET_ar71xx_generic_GLINET is not set
 -# CONFIG_TARGET_ar71xx_generic_HIWIFI_HC6361 is not set
@@ -144,6 +145,7 @@ index ede7cb3..aa5f7f3 100644
 -# CONFIG_TARGET_ar71xx_generic_WNR612V2 is not set
 -# CONFIG_TARGET_ar71xx_generic_WNR1000V2 is not set
 -# CONFIG_TARGET_ar71xx_generic_WNR2200 is not set
+-# CONFIG_TARGET_ar71xx_generic_OMEGA is not set
 -# CONFIG_TARGET_ar71xx_generic_OOLITE is not set
 -# CONFIG_TARGET_ar71xx_generic_OM2P is not set
 -# CONFIG_TARGET_ar71xx_generic_OM5P is not set
@@ -159,6 +161,7 @@ index ede7cb3..aa5f7f3 100644
 -# CONFIG_TARGET_ar71xx_generic_RNXN360RT is not set
 -# CONFIG_TARGET_ar71xx_generic_CAP4200AG is not set
 -# CONFIG_TARGET_ar71xx_generic_WLR8100 is not set
+-# CONFIG_TARGET_ar71xx_generic_BSB is not set
 -# CONFIG_TARGET_ar71xx_generic_ARCHERC7 is not set
 -# CONFIG_TARGET_ar71xx_generic_CPE510 is not set
 -# CONFIG_TARGET_ar71xx_generic_TLMR10U is not set
@@ -235,7 +238,7 @@ index ede7cb3..aa5f7f3 100644
  CONFIG_LINUX_3_18=y
  CONFIG_DEFAULT_base-files=y
  CONFIG_DEFAULT_busybox=y
-@@ -203,13 +65,9 @@
+@@ -211,13 +65,9 @@ CONFIG_DEFAULT_firewall=y
  CONFIG_DEFAULT_fstools=y
  CONFIG_DEFAULT_ip6tables=y
  CONFIG_DEFAULT_iptables=y
@@ -251,7 +254,7 @@ index ede7cb3..aa5f7f3 100644
  CONFIG_DEFAULT_kmod-usb2=y
  CONFIG_DEFAULT_libc=y
  CONFIG_DEFAULT_libgcc=y
-@@ -223,16 +81,18 @@
+@@ -231,16 +81,18 @@ CONFIG_DEFAULT_ppp-mod-pppoe=y
  CONFIG_DEFAULT_swconfig=y
  CONFIG_DEFAULT_uboot-envtools=y
  CONFIG_DEFAULT_uci=y
@@ -276,7 +279,7 @@ index ede7cb3..aa5f7f3 100644
  
  #
  # Target Images
-@@ -251,24 +111,30 @@
+@@ -259,24 +111,30 @@ CONFIG_EXTERNAL_CPIO=""
  #
  # CONFIG_TARGET_ROOTFS_EXT4FS is not set
  # CONFIG_TARGET_ROOTFS_JFFS2 is not set
@@ -310,7 +313,7 @@ index ede7cb3..aa5f7f3 100644
  
  #
  # General build options
-@@ -284,7 +150,6 @@
+@@ -292,7 +150,6 @@ CONFIG_SHADOW_PASSWORDS=y
  # Kernel build options
  #
  CONFIG_KERNEL_PRINTK=y
@@ -318,7 +321,7 @@ index ede7cb3..aa5f7f3 100644
  CONFIG_KERNEL_SWAP=y
  CONFIG_KERNEL_DEBUG_FS=y
  # CONFIG_KERNEL_PERF_EVENTS is not set
-@@ -293,7 +158,10 @@
+@@ -301,7 +158,10 @@ CONFIG_KERNEL_KALLSYMS=y
  # CONFIG_KERNEL_FTRACE is not set
  CONFIG_KERNEL_DEBUG_KERNEL=y
  CONFIG_KERNEL_DEBUG_INFO=y
@@ -329,7 +332,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_KERNEL_KPROBES is not set
  # CONFIG_KERNEL_AIO is not set
  # CONFIG_KERNEL_DIRECT_IO is not set
-@@ -307,7 +175,6 @@
+@@ -315,7 +175,6 @@ CONFIG_KERNEL_ELF_CORE=y
  CONFIG_KERNEL_PRINTK_TIME=y
  # CONFIG_KERNEL_SLABINFO is not set
  # CONFIG_KERNEL_PROC_PAGE_MONITOR is not set
@@ -337,7 +340,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_KERNEL_KEXEC is not set
  # CONFIG_USE_RFKILL is not set
  # CONFIG_USE_SPARSE is not set
-@@ -362,9 +229,8 @@
+@@ -370,9 +229,8 @@ CONFIG_TARGET_ROOTFS_DIR=""
  CONFIG_EXTERNAL_KERNEL_TREE=""
  CONFIG_KERNEL_GIT_CLONE_URI=""
  CONFIG_EXTRA_OPTIMIZATION="-fno-caller-saves"
@@ -348,7 +351,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_EXTRA_TARGET_ARCH is not set
  CONFIG_EXTRA_BINUTILS_CONFIG_OPTIONS=""
  CONFIG_BINUTILS_VERSION="linaro"
-@@ -383,7 +249,7 @@
+@@ -391,7 +249,7 @@ CONFIG_UCLIBC_VERSION="0.9.33.2"
  CONFIG_UCLIBC_VERSION_0_9_33=y
  CONFIG_LIBC="uClibc"
  CONFIG_LIBC_VERSION="0.9.33.2"
@@ -357,7 +360,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_IB is not set
  # CONFIG_SDK is not set
  # CONFIG_MAKE_TOOLCHAIN is not set
-@@ -406,8 +272,8 @@
+@@ -414,8 +272,8 @@ CONFIG_TARGET_INIT_SUPPRESS_STDERR=y
  CONFIG_PER_FEED_REPO=y
  CONFIG_PER_FEED_REPO_ADD_DISABLED=y
  CONFIG_PER_FEED_REPO_ADD_COMMENTED=y
@@ -368,7 +371,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_FEED_routing is not set
  # CONFIG_FEED_telephony is not set
  # CONFIG_FEED_management is not set
-@@ -1342,6 +1208,7 @@
+@@ -1349,6 +1207,7 @@ CONFIG_PACKAGE_dropbear=y
  # CONFIG_PACKAGE_ead is not set
  CONFIG_PACKAGE_firewall=y
  CONFIG_PACKAGE_fstools=y
@@ -376,7 +379,7 @@ index ede7cb3..aa5f7f3 100644
  CONFIG_PACKAGE_jsonfilter=y
  # CONFIG_PACKAGE_libatomic is not set
  CONFIG_PACKAGE_libc=y
-@@ -1352,7 +1219,6 @@
+@@ -1359,7 +1218,6 @@ CONFIG_PACKAGE_libgcc=y
  # CONFIG_PACKAGE_libthread-db is not set
  CONFIG_PACKAGE_mtd=y
  CONFIG_PACKAGE_netifd=y
@@ -384,7 +387,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_om-watchdog is not set
  CONFIG_PACKAGE_opkg=y
  # CONFIG_PACKAGE_opkg-smime is not set
-@@ -1365,21 +1231,32 @@
+@@ -1372,21 +1230,32 @@ CONFIG_PACKAGE_procd=y
  # CONFIG_PROCD_ZRAM_TMPFS is not set
  # CONFIG_PACKAGE_qos-scripts is not set
  # CONFIG_PACKAGE_resolveip is not set
@@ -420,7 +423,7 @@ index ede7cb3..aa5f7f3 100644
  
  #
  # Development
-@@ -1391,7 +1268,6 @@
+@@ -1398,7 +1267,6 @@ CONFIG_PACKAGE_uboot-ar71xx-nbg460n_550n_550nh=y
  # CONFIG_PACKAGE_objdump is not set
  # CONFIG_PACKAGE_trace-cmd is not set
  # CONFIG_PACKAGE_trace-cmd-extra is not set
@@ -428,7 +431,7 @@ index ede7cb3..aa5f7f3 100644
  
  #
  # Firmware
-@@ -1415,7 +1291,7 @@
+@@ -1422,7 +1290,7 @@ CONFIG_PACKAGE_uboot-ar71xx-nbg460n_550n_550nh=y
  # CONFIG_PACKAGE_kmod-md-mod is not set
  # CONFIG_PACKAGE_kmod-nbd is not set
  # CONFIG_PACKAGE_kmod-scsi-cdrom is not set
@@ -437,7 +440,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_kmod-scsi-generic is not set
  
  #
-@@ -1454,6 +1330,7 @@
+@@ -1461,6 +1329,7 @@ CONFIG_PACKAGE_kmod-crypto-core=y
  # CONFIG_PACKAGE_kmod-crypto-md5 is not set
  # CONFIG_PACKAGE_kmod-crypto-michael-mic is not set
  # CONFIG_PACKAGE_kmod-crypto-misc is not set
@@ -445,7 +448,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_kmod-crypto-null is not set
  # CONFIG_PACKAGE_kmod-crypto-ocf is not set
  # CONFIG_PACKAGE_kmod-crypto-pcbc is not set
-@@ -1511,6 +1388,7 @@
+@@ -1518,6 +1387,7 @@ CONFIG_PACKAGE_kmod-crypto-core=y
  #
  # CONFIG_PACKAGE_kmod-i2c-core is not set
  # CONFIG_PACKAGE_kmod-i2c-gpio-custom is not set
@@ -453,7 +456,7 @@ index ede7cb3..aa5f7f3 100644
  
  #
  # Input modules
-@@ -1532,8 +1410,6 @@
+@@ -1539,8 +1409,6 @@ CONFIG_PACKAGE_kmod-crypto-core=y
  #
  # CONFIG_PACKAGE_kmod-leds-gpio is not set
  # CONFIG_PACKAGE_kmod-leds-pca963x is not set
@@ -462,7 +465,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_kmod-ledtrig-default-on is not set
  # CONFIG_PACKAGE_kmod-ledtrig-gpio is not set
  # CONFIG_PACKAGE_kmod-ledtrig-heartbeat is not set
-@@ -1543,7 +1419,7 @@
+@@ -1550,7 +1418,7 @@ CONFIG_PACKAGE_kmod-crypto-core=y
  # CONFIG_PACKAGE_kmod-ledtrig-oneshot is not set
  # CONFIG_PACKAGE_kmod-ledtrig-timer is not set
  # CONFIG_PACKAGE_kmod-ledtrig-transient is not set
@@ -471,15 +474,15 @@ index ede7cb3..aa5f7f3 100644
  
  #
  # Libraries
-@@ -1681,6 +1557,7 @@
- # CONFIG_PACKAGE_kmod-pcnet32 is not set
+@@ -1689,6 +1557,7 @@ CONFIG_PACKAGE_kmod-nf-nathelper=y
+ # CONFIG_PACKAGE_kmod-phy-broadcom is not set
  # CONFIG_PACKAGE_kmod-r6040 is not set
  # CONFIG_PACKAGE_kmod-r8169 is not set
 +# CONFIG_PACKAGE_kmod-siit is not set
  # CONFIG_PACKAGE_kmod-sis190 is not set
  # CONFIG_PACKAGE_kmod-sis900 is not set
  # CONFIG_PACKAGE_kmod-skge is not set
-@@ -1763,7 +1640,7 @@
+@@ -1770,7 +1639,7 @@ CONFIG_PACKAGE_kmod-slhc=y
  # CONFIG_PACKAGE_kmod-eeprom-at24 is not set
  # CONFIG_PACKAGE_kmod-eeprom-at25 is not set
  # CONFIG_PACKAGE_kmod-gpio-beeper is not set
@@ -488,17 +491,14 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_kmod-gpio-dev is not set
  # CONFIG_PACKAGE_kmod-gpio-mcp23s08 is not set
  # CONFIG_PACKAGE_kmod-gpio-nxp-74hc164 is not set
-@@ -1774,8 +1651,8 @@
+@@ -1781,16 +1650,26 @@ CONFIG_PACKAGE_kmod-gpio-button-hotplug=y
  # CONFIG_PACKAGE_kmod-mmc is not set
  # CONFIG_PACKAGE_kmod-mmc-over-gpio is not set
  # CONFIG_PACKAGE_kmod-mtdtests is not set
 +# CONFIG_PACKAGE_kmod-mvsdio is not set
- # CONFIG_PACKAGE_kmod-nand is not set
--# CONFIG_PACKAGE_kmod-nand-ar934x is not set
- # CONFIG_PACKAGE_kmod-nandsim is not set
  # CONFIG_PACKAGE_kmod-pps is not set
  # CONFIG_PACKAGE_kmod-pps-gpio is not set
-@@ -1783,10 +1660,19 @@
+ # CONFIG_PACKAGE_kmod-ptp is not set
  # CONFIG_PACKAGE_kmod-random-core is not set
  # CONFIG_PACKAGE_kmod-regmap is not set
  # CONFIG_PACKAGE_kmod-rotary-gpio-custom is not set
@@ -518,7 +518,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_kmod-zram is not set
  
  #
-@@ -1802,7 +1688,6 @@
+@@ -1806,7 +1685,6 @@ CONFIG_PACKAGE_kmod-gpio-button-hotplug=y
  # CONFIG_PACKAGE_kmod-spi-gpio is not set
  # CONFIG_PACKAGE_kmod-spi-gpio-custom is not set
  # CONFIG_PACKAGE_kmod-spi-gpio-old is not set
@@ -526,7 +526,7 @@ index ede7cb3..aa5f7f3 100644
  
  #
  # Sound Support
-@@ -1820,11 +1705,11 @@
+@@ -1824,11 +1702,11 @@ CONFIG_PACKAGE_kmod-usb-core=y
  # CONFIG_PACKAGE_kmod-usb-dwc3 is not set
  # CONFIG_PACKAGE_kmod-usb-hid is not set
  # CONFIG_PACKAGE_kmod-usb-net is not set
@@ -540,7 +540,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_kmod-usb-storage-extras is not set
  # CONFIG_PACKAGE_kmod-usb-uhci is not set
  # CONFIG_PACKAGE_kmod-usb-wdm is not set
-@@ -1859,15 +1744,11 @@
+@@ -1863,15 +1741,11 @@ CONFIG_PACKAGE_kmod-usb2=y
  # Wireless Drivers
  #
  # CONFIG_PACKAGE_kmod-adm8211 is not set
@@ -559,7 +559,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_kmod-ath9k-htc is not set
  # CONFIG_PACKAGE_kmod-b43 is not set
  # CONFIG_PACKAGE_kmod-b43legacy is not set
-@@ -1892,7 +1773,7 @@
+@@ -1896,7 +1770,7 @@ CONFIG_PACKAGE_MAC80211_MESH=y
  # CONFIG_PACKAGE_kmod-mac80211-hwsim is not set
  # CONFIG_PACKAGE_kmod-mt76 is not set
  # CONFIG_PACKAGE_kmod-mwifiex-pcie is not set
@@ -568,7 +568,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_kmod-net-airo is not set
  # CONFIG_PACKAGE_kmod-net-hermes is not set
  # CONFIG_PACKAGE_kmod-net-hermes-pci is not set
-@@ -1930,24 +1811,40 @@
+@@ -1933,11 +1807,17 @@ CONFIG_PACKAGE_MAC80211_MESH=y
  #
  # Lua
  #
@@ -588,12 +588,8 @@ index ede7cb3..aa5f7f3 100644
  # Libraries
  #
  
+@@ -1949,13 +1829,18 @@ CONFIG_PACKAGE_MAC80211_MESH=y
  #
-+# Compression
-+#
-+# CONFIG_PACKAGE_libbz2 is not set
-+
-+#
  # Filesystem
  #
 +# CONFIG_PACKAGE_libacl is not set
@@ -611,7 +607,7 @@ index ede7cb3..aa5f7f3 100644
  CONFIG_PACKAGE_libip4tc=y
  CONFIG_PACKAGE_libip6tc=y
  # CONFIG_PACKAGE_libiptc is not set
-@@ -1957,58 +1854,111 @@
+@@ -1965,60 +1850,112 @@ CONFIG_PACKAGE_libxtables=y
  # SSL
  #
  # CONFIG_PACKAGE_libcyassl is not set
@@ -626,7 +622,7 @@ index ede7cb3..aa5f7f3 100644
 +# CONFIG_PACKAGE_libpq is not set
 +# CONFIG_PACKAGE_libsqlite3 is not set
 +# CONFIG_PACKAGE_alsa-lib is not set
-+# CONFIG_PACKAGE_argp-standalone is not set
+ # CONFIG_PACKAGE_argp-standalone is not set
 +# CONFIG_PACKAGE_bind-libs is not set
 +# CONFIG_PACKAGE_freeradius-client is not set
 +# CONFIG_PACKAGE_libao is not set
@@ -644,6 +640,7 @@ index ede7cb3..aa5f7f3 100644
 +# CONFIG_PACKAGE_libdb47 is not set
 +# CONFIG_PACKAGE_libdb47xx is not set
 +# CONFIG_PACKAGE_libdbus is not set
+ # CONFIG_PACKAGE_libelf1 is not set
  # CONFIG_PACKAGE_libevent2 is not set
  # CONFIG_PACKAGE_libevent2-core is not set
  # CONFIG_PACKAGE_libevent2-extra is not set
@@ -726,7 +723,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_libuclient is not set
  # CONFIG_PACKAGE_libusb-1.0 is not set
  # CONFIG_PACKAGE_libusb-compat is not set
-@@ -2016,26 +1966,251 @@
+@@ -2026,26 +1963,251 @@ CONFIG_PACKAGE_libuci=y
  # CONFIG_PACKAGE_libustream-openssl is not set
  # CONFIG_PACKAGE_libustream-polarssl is not set
  # CONFIG_PACKAGE_libuuid is not set
@@ -978,7 +975,7 @@ index ede7cb3..aa5f7f3 100644
  CONFIG_PACKAGE_ip6tables=y
  # CONFIG_PACKAGE_ip6tables-extra is not set
  # CONFIG_PACKAGE_ip6tables-mod-nat is not set
-@@ -2081,6 +2256,22 @@
+@@ -2091,6 +2253,22 @@ CONFIG_PACKAGE_iptables=y
  # CONFIG_PACKAGE_nftables is not set
  
  #
@@ -1001,7 +998,7 @@ index ede7cb3..aa5f7f3 100644
  # Linux ATM tools
  #
  # CONFIG_PACKAGE_atm-aread is not set
-@@ -2111,6 +2302,11 @@
+@@ -2121,6 +2299,11 @@ CONFIG_PACKAGE_iptables=y
  # CONFIG_PACKAGE_br2684ctl is not set
  
  #
@@ -1013,7 +1010,7 @@ index ede7cb3..aa5f7f3 100644
  # Routing and Redirection
  #
  # CONFIG_PACKAGE_genl is not set
-@@ -2180,20 +2376,34 @@
+@@ -2190,20 +2373,34 @@ CONFIG_PACKAGE_iptables=y
  # CONFIG_PACKAGE_thc-ipv6-trace6 is not set
  
  #
@@ -1049,7 +1046,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_6in4 is not set
  # CONFIG_PACKAGE_6rd is not set
  # CONFIG_PACKAGE_6to4 is not set
-@@ -2201,6 +2411,7 @@
+@@ -2211,6 +2408,7 @@ CONFIG_PACKAGE_iptables=y
  # CONFIG_PACKAGE_chat is not set
  # CONFIG_PACKAGE_ds-lite is not set
  # CONFIG_PACKAGE_eapol-test is not set
@@ -1057,7 +1054,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_gre is not set
  # CONFIG_PACKAGE_hostapd is not set
  CONFIG_PACKAGE_hostapd-common=y
-@@ -2225,10 +2436,13 @@
+@@ -2235,10 +2433,13 @@ CONFIG_PACKAGE_hostapd-common=y
  CONFIG_PACKAGE_iw=y
  # CONFIG_PACKAGE_map is not set
  # CONFIG_PACKAGE_mdns is not set
@@ -1071,7 +1068,7 @@ index ede7cb3..aa5f7f3 100644
  CONFIG_PACKAGE_ppp=y
  # CONFIG_PACKAGE_ppp-mod-pppoa is not set
  CONFIG_PACKAGE_ppp-mod-pppoe=y
-@@ -2241,16 +2455,17 @@
+@@ -2251,16 +2452,17 @@ CONFIG_PACKAGE_ppp-mod-pppoe=y
  # CONFIG_PACKAGE_rssileds is not set
  # CONFIG_PACKAGE_samba36-client is not set
  # CONFIG_PACKAGE_samba36-server is not set
@@ -1093,7 +1090,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_wpa-cli is not set
  # CONFIG_PACKAGE_wpa-supplicant is not set
  # CONFIG_WPA_SUPPLICANT_NO_TIMESTAMP_CHECK is not set
-@@ -2265,9 +2480,16 @@
+@@ -2275,9 +2477,16 @@ CONFIG_DRIVER_11N_SUPPORT=y
  # CONFIG_PACKAGE_wpad-mesh is not set
  CONFIG_PACKAGE_wpad-mini=y
  # CONFIG_PACKAGE_wpan-tools is not set
@@ -1110,8 +1107,8 @@ index ede7cb3..aa5f7f3 100644
  # Utilities
  #
  
-@@ -2276,8 +2498,15 @@
- #
+@@ -2291,8 +2500,15 @@ CONFIG_PACKAGE_wpad-mini=y
+ # CONFIG_PACKAGE_bzip2 is not set
  
  #
 +# Compression
@@ -1126,7 +1123,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_badblocks is not set
  # CONFIG_PACKAGE_debugfs is not set
  # CONFIG_PACKAGE_dumpe2fs is not set
-@@ -2285,6 +2514,8 @@
+@@ -2300,6 +2516,8 @@ CONFIG_PACKAGE_wpad-mini=y
  # CONFIG_PACKAGE_e2fsprogs is not set
  # CONFIG_PACKAGE_filefrag is not set
  # CONFIG_PACKAGE_fuse-utils is not set
@@ -1135,7 +1132,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_resize2fs is not set
  # CONFIG_PACKAGE_sysfsutils is not set
  # CONFIG_PACKAGE_tune2fs is not set
-@@ -2293,6 +2524,12 @@
+@@ -2308,6 +2526,12 @@ CONFIG_PACKAGE_wpad-mini=y
  # CONFIG_PACKAGE_xfs-mkfs is not set
  
  #
@@ -1148,7 +1145,7 @@ index ede7cb3..aa5f7f3 100644
  # Terminal
  #
  # CONFIG_PACKAGE_agetty is not set
-@@ -2301,34 +2538,51 @@
+@@ -2316,34 +2540,51 @@ CONFIG_PACKAGE_wpad-mini=y
  # CONFIG_PACKAGE_wall is not set
  
  #
@@ -1201,7 +1198,7 @@ index ede7cb3..aa5f7f3 100644
  # CONFIG_PACKAGE_logger is not set
  # CONFIG_PACKAGE_look is not set
  # CONFIG_PACKAGE_losetup is not set
-@@ -2341,13 +2595,21 @@
+@@ -2356,13 +2597,21 @@ CONFIG_PACKAGE_libjson-script=y
  # CONFIG_PACKAGE_ocf-crypto-headers is not set
  # CONFIG_PACKAGE_openssl-util is not set
  # CONFIG_PACKAGE_owipcalc is not set
@@ -1224,7 +1221,7 @@ index ede7cb3..aa5f7f3 100644
  CONFIG_PACKAGE_uboot-envtools=y
  # CONFIG_UBOOT_ENVTOOLS_UBI is not set
  # CONFIG_PACKAGE_ugps is not set
-@@ -2356,4 +2618,6 @@
+@@ -2371,4 +2620,6 @@ CONFIG_PACKAGE_uboot-envtools=y
  # CONFIG_PACKAGE_usbutils is not set
  # CONFIG_PACKAGE_uuidd is not set
  # CONFIG_PACKAGE_uuidgen is not set
