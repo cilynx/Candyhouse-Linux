@@ -1228,3 +1228,39 @@ index 8413a41..4f0ca82 100644
 +# CONFIG_PACKAGE_v4l-utils is not set
 +# CONFIG_PACKAGE_watchcat is not set
  # CONFIG_PACKAGE_whereis is not set
+--- a/package/system/mtd/src/Makefile
++++ b/package/system/mtd/src/Makefile
+@@ -11,6 +11,7 @@ obj.bcm53xx = $(obj.brcm)
+ obj.brcm63xx = imagetag.o
+ obj.ramips = $(obj.seama)
+ obj.mvebu = linksys_bootcount.o
++obj.kirkwood = linksys_bootcount.o
+ 
+ ifdef FIS_SUPPORT
+   obj += fis.o
+diff --git a/target/linux/kirkwood/base-files/etc/init.d/linksys_recovery b/target/linux/kirkwood/base-files/etc/init.d/linksys_recovery
+new file mode 100755
+index 0000000..1b8d701
+--- /dev/null
++++ b/target/linux/kirkwood/base-files/etc/init.d/linksys_recovery
+@@ -0,0 +1,20 @@
++#!/bin/sh /etc/rc.common
++# Copyright (C) 2015 OpenWrt.org
++
++START=97
++boot() {
++. /lib/functions.sh
++. /lib/kirkwood.sh
++
++case $(kirkwood_board_name) in
++	ea4500)
++		# make sure auto_recovery in uboot is always on
++		AUTO_RECOVERY_ENA="`fw_printenv -n auto_recovery`"
++		if [ "$AUTO_RECOVERY_ENA" != "yes" ] ; then
++			fw_setenv auto_recovery yes
++		fi
++		# reset the boot counter
++		mtd resetbc s_env
++		;;
++esac
++}
