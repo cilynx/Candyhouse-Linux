@@ -49,7 +49,7 @@ openwrt3500:: openwrt-kirkwood-ea3500-pri.ssa openwrt-kirkwood-ea3500-alt.ssa
 openwrt4500:: openwrt-kirkwood-ea4500-pri.ssa openwrt-kirkwood-ea4500-alt.ssa
 
 .openwrt_fetched:
-	git clone git://git.openwrt.org/openwrt.git
+	git clone git://git.openwrt.org/15.05/openwrt.git
 	touch $@
 
 .openwrt_luci: .openwrt_fetched
