@@ -1,5 +1,13 @@
-diff --git a/target/linux/kirkwood/image/Makefile b/target/linux/kirkwood/image/Makefile
-index 8413a41..4f0ca82 100644
+--- a/package/system/mtd/src/Makefile
++++ b/package/system/mtd/src/Makefile
+@@ -11,6 +11,7 @@ obj.bcm53xx = $(obj.brcm)
+ obj.brcm63xx = imagetag.o
+ obj.ramips = $(obj.seama)
+ obj.mvebu = linksys_bootcount.o
++obj.kirkwood = linksys_bootcount.o
+ 
+ ifdef FIS_SUPPORT
+   obj += fis.o
 --- a/target/linux/kirkwood/image/Makefile
 +++ b/target/linux/kirkwood/image/Makefile
 @@ -9,6 +9,9 @@ include $(INCLUDE_DIR)/image.mk
@@ -559,7 +567,7 @@ index 8413a41..4f0ca82 100644
  # CONFIG_PACKAGE_kmod-ath9k-htc is not set
  # CONFIG_PACKAGE_kmod-b43 is not set
  # CONFIG_PACKAGE_kmod-b43legacy is not set
-@@ -1896,7 +1770,7 @@ CONFIG_PACKAGE_MAC80211_MESH=y
+@@ -1896,11 +1770,14 @@ CONFIG_PACKAGE_MAC80211_MESH=y
  # CONFIG_PACKAGE_kmod-mac80211-hwsim is not set
  # CONFIG_PACKAGE_kmod-mt76 is not set
  # CONFIG_PACKAGE_kmod-mwifiex-pcie is not set
@@ -568,7 +576,14 @@ index 8413a41..4f0ca82 100644
  # CONFIG_PACKAGE_kmod-net-airo is not set
  # CONFIG_PACKAGE_kmod-net-hermes is not set
  # CONFIG_PACKAGE_kmod-net-hermes-pci is not set
-@@ -1933,11 +1807,17 @@ CONFIG_PACKAGE_MAC80211_MESH=y
+ # CONFIG_PACKAGE_kmod-net-hermes-plx is not set
++# CONFIG_PACKAGE_kmod-net-ipw2100 is not set
++# CONFIG_PACKAGE_kmod-net-ipw2200 is not set
++# CONFIG_PACKAGE_kmod-net-libipw is not set
+ # CONFIG_PACKAGE_kmod-net-prism54 is not set
+ # CONFIG_PACKAGE_kmod-net-rtl8188eu is not set
+ # CONFIG_PACKAGE_kmod-net-rtl8192su is not set
+@@ -1930,11 +1807,17 @@ CONFIG_PACKAGE_MAC80211_MESH=y
  #
  # Lua
  #
@@ -588,7 +603,7 @@ index 8413a41..4f0ca82 100644
  # Libraries
  #
  
-@@ -1949,13 +1829,18 @@ CONFIG_PACKAGE_MAC80211_MESH=y
+@@ -1946,13 +1829,18 @@ CONFIG_PACKAGE_MAC80211_MESH=y
  #
  # Filesystem
  #
@@ -607,7 +622,7 @@ index 8413a41..4f0ca82 100644
  CONFIG_PACKAGE_libip4tc=y
  CONFIG_PACKAGE_libip6tc=y
  # CONFIG_PACKAGE_libiptc is not set
-@@ -1965,60 +1850,112 @@ CONFIG_PACKAGE_libxtables=y
+@@ -1962,60 +1850,113 @@ CONFIG_PACKAGE_libxtables=y
  # SSL
  #
  # CONFIG_PACKAGE_libcyassl is not set
@@ -699,6 +714,7 @@ index 8413a41..4f0ca82 100644
  # CONFIG_PACKAGE_libpopt is not set
 +# CONFIG_PACKAGE_libprotobuf-c is not set
 +# CONFIG_PACKAGE_libqrencode is not set
++# CONFIG_PACKAGE_libradcli is not set
  # CONFIG_PACKAGE_libreadline is not set
  # CONFIG_PACKAGE_libroxml is not set
  # CONFIG_PACKAGE_librpc is not set
@@ -723,7 +739,7 @@ index 8413a41..4f0ca82 100644
  # CONFIG_PACKAGE_libuclient is not set
  # CONFIG_PACKAGE_libusb-1.0 is not set
  # CONFIG_PACKAGE_libusb-compat is not set
-@@ -2026,26 +1963,251 @@ CONFIG_PACKAGE_libuci=y
+@@ -2023,26 +1964,251 @@ CONFIG_PACKAGE_libuci=y
  # CONFIG_PACKAGE_libustream-openssl is not set
  # CONFIG_PACKAGE_libustream-polarssl is not set
  # CONFIG_PACKAGE_libuuid is not set
@@ -755,26 +771,26 @@ index 8413a41..4f0ca82 100644
 +#
 +# Translations
 +#
++# CONFIG_LUCI_LANG_uk is not set
 +# CONFIG_LUCI_LANG_hu is not set
 +# CONFIG_LUCI_LANG_pt is not set
-+# CONFIG_LUCI_LANG_sk is not set
-+# CONFIG_LUCI_LANG_no is not set
++# CONFIG_LUCI_LANG_ro is not set
 +# CONFIG_LUCI_LANG_en is not set
-+# CONFIG_LUCI_LANG_el is not set
-+# CONFIG_LUCI_LANG_uk is not set
-+# CONFIG_LUCI_LANG_ja is not set
++# CONFIG_LUCI_LANG_pl is not set
++# CONFIG_LUCI_LANG_sk is not set
++# CONFIG_LUCI_LANG_ru is not set
 +# CONFIG_LUCI_LANG_vi is not set
 +# CONFIG_LUCI_LANG_he is not set
-+# CONFIG_LUCI_LANG_ro is not set
++# CONFIG_LUCI_LANG_no is not set
 +# CONFIG_LUCI_LANG_ms is not set
-+# CONFIG_LUCI_LANG_pl is not set
 +# CONFIG_LUCI_LANG_zh-cn is not set
 +# CONFIG_LUCI_LANG_de is not set
 +# CONFIG_LUCI_LANG_zh-tw is not set
 +# CONFIG_LUCI_LANG_tr is not set
 +# CONFIG_LUCI_LANG_sv is not set
-+# CONFIG_LUCI_LANG_ru is not set
++# CONFIG_LUCI_LANG_ja is not set
 +# CONFIG_LUCI_LANG_pt-br is not set
++# CONFIG_LUCI_LANG_el is not set
 +# CONFIG_LUCI_LANG_ca is not set
 +# CONFIG_LUCI_LANG_es is not set
 +# CONFIG_LUCI_LANG_cs is not set
@@ -975,7 +991,7 @@ index 8413a41..4f0ca82 100644
  CONFIG_PACKAGE_ip6tables=y
  # CONFIG_PACKAGE_ip6tables-extra is not set
  # CONFIG_PACKAGE_ip6tables-mod-nat is not set
-@@ -2091,6 +2253,22 @@ CONFIG_PACKAGE_iptables=y
+@@ -2088,6 +2254,22 @@ CONFIG_PACKAGE_iptables=y
  # CONFIG_PACKAGE_nftables is not set
  
  #
@@ -998,7 +1014,7 @@ index 8413a41..4f0ca82 100644
  # Linux ATM tools
  #
  # CONFIG_PACKAGE_atm-aread is not set
-@@ -2121,6 +2299,11 @@ CONFIG_PACKAGE_iptables=y
+@@ -2118,6 +2300,11 @@ CONFIG_PACKAGE_iptables=y
  # CONFIG_PACKAGE_br2684ctl is not set
  
  #
@@ -1010,7 +1026,7 @@ index 8413a41..4f0ca82 100644
  # Routing and Redirection
  #
  # CONFIG_PACKAGE_genl is not set
-@@ -2190,20 +2373,34 @@ CONFIG_PACKAGE_iptables=y
+@@ -2187,20 +2374,34 @@ CONFIG_PACKAGE_iptables=y
  # CONFIG_PACKAGE_thc-ipv6-trace6 is not set
  
  #
@@ -1046,7 +1062,7 @@ index 8413a41..4f0ca82 100644
  # CONFIG_PACKAGE_6in4 is not set
  # CONFIG_PACKAGE_6rd is not set
  # CONFIG_PACKAGE_6to4 is not set
-@@ -2211,6 +2408,7 @@ CONFIG_PACKAGE_iptables=y
+@@ -2208,6 +2409,7 @@ CONFIG_PACKAGE_iptables=y
  # CONFIG_PACKAGE_chat is not set
  # CONFIG_PACKAGE_ds-lite is not set
  # CONFIG_PACKAGE_eapol-test is not set
@@ -1054,7 +1070,7 @@ index 8413a41..4f0ca82 100644
  # CONFIG_PACKAGE_gre is not set
  # CONFIG_PACKAGE_hostapd is not set
  CONFIG_PACKAGE_hostapd-common=y
-@@ -2235,10 +2433,13 @@ CONFIG_PACKAGE_hostapd-common=y
+@@ -2232,10 +2434,13 @@ CONFIG_PACKAGE_hostapd-common=y
  CONFIG_PACKAGE_iw=y
  # CONFIG_PACKAGE_map is not set
  # CONFIG_PACKAGE_mdns is not set
@@ -1068,7 +1084,7 @@ index 8413a41..4f0ca82 100644
  CONFIG_PACKAGE_ppp=y
  # CONFIG_PACKAGE_ppp-mod-pppoa is not set
  CONFIG_PACKAGE_ppp-mod-pppoe=y
-@@ -2251,16 +2452,17 @@ CONFIG_PACKAGE_ppp-mod-pppoe=y
+@@ -2248,16 +2453,17 @@ CONFIG_PACKAGE_ppp-mod-pppoe=y
  # CONFIG_PACKAGE_rssileds is not set
  # CONFIG_PACKAGE_samba36-client is not set
  # CONFIG_PACKAGE_samba36-server is not set
@@ -1090,7 +1106,7 @@ index 8413a41..4f0ca82 100644
  # CONFIG_PACKAGE_wpa-cli is not set
  # CONFIG_PACKAGE_wpa-supplicant is not set
  # CONFIG_WPA_SUPPLICANT_NO_TIMESTAMP_CHECK is not set
-@@ -2275,9 +2477,16 @@ CONFIG_DRIVER_11N_SUPPORT=y
+@@ -2272,9 +2478,16 @@ CONFIG_DRIVER_11N_SUPPORT=y
  # CONFIG_PACKAGE_wpad-mesh is not set
  CONFIG_PACKAGE_wpad-mini=y
  # CONFIG_PACKAGE_wpan-tools is not set
@@ -1107,7 +1123,7 @@ index 8413a41..4f0ca82 100644
  # Utilities
  #
  
-@@ -2291,8 +2500,15 @@ CONFIG_PACKAGE_wpad-mini=y
+@@ -2288,8 +2501,15 @@ CONFIG_PACKAGE_wpad-mini=y
  # CONFIG_PACKAGE_bzip2 is not set
  
  #
@@ -1123,7 +1139,7 @@ index 8413a41..4f0ca82 100644
  # CONFIG_PACKAGE_badblocks is not set
  # CONFIG_PACKAGE_debugfs is not set
  # CONFIG_PACKAGE_dumpe2fs is not set
-@@ -2300,6 +2516,8 @@ CONFIG_PACKAGE_wpad-mini=y
+@@ -2297,6 +2517,8 @@ CONFIG_PACKAGE_wpad-mini=y
  # CONFIG_PACKAGE_e2fsprogs is not set
  # CONFIG_PACKAGE_filefrag is not set
  # CONFIG_PACKAGE_fuse-utils is not set
@@ -1132,7 +1148,7 @@ index 8413a41..4f0ca82 100644
  # CONFIG_PACKAGE_resize2fs is not set
  # CONFIG_PACKAGE_sysfsutils is not set
  # CONFIG_PACKAGE_tune2fs is not set
-@@ -2308,6 +2526,12 @@ CONFIG_PACKAGE_wpad-mini=y
+@@ -2305,6 +2527,12 @@ CONFIG_PACKAGE_wpad-mini=y
  # CONFIG_PACKAGE_xfs-mkfs is not set
  
  #
@@ -1145,7 +1161,7 @@ index 8413a41..4f0ca82 100644
  # Terminal
  #
  # CONFIG_PACKAGE_agetty is not set
-@@ -2316,34 +2540,51 @@ CONFIG_PACKAGE_wpad-mini=y
+@@ -2313,34 +2541,51 @@ CONFIG_PACKAGE_wpad-mini=y
  # CONFIG_PACKAGE_wall is not set
  
  #
@@ -1198,7 +1214,7 @@ index 8413a41..4f0ca82 100644
  # CONFIG_PACKAGE_logger is not set
  # CONFIG_PACKAGE_look is not set
  # CONFIG_PACKAGE_losetup is not set
-@@ -2356,13 +2597,21 @@ CONFIG_PACKAGE_libjson-script=y
+@@ -2353,13 +2598,21 @@ CONFIG_PACKAGE_libjson-script=y
  # CONFIG_PACKAGE_ocf-crypto-headers is not set
  # CONFIG_PACKAGE_openssl-util is not set
  # CONFIG_PACKAGE_owipcalc is not set
@@ -1221,26 +1237,15 @@ index 8413a41..4f0ca82 100644
  CONFIG_PACKAGE_uboot-envtools=y
  # CONFIG_UBOOT_ENVTOOLS_UBI is not set
  # CONFIG_PACKAGE_ugps is not set
-@@ -2371,4 +2620,6 @@ CONFIG_PACKAGE_uboot-envtools=y
+@@ -2368,4 +2621,6 @@ CONFIG_PACKAGE_uboot-envtools=y
  # CONFIG_PACKAGE_usbutils is not set
  # CONFIG_PACKAGE_uuidd is not set
  # CONFIG_PACKAGE_uuidgen is not set
 +# CONFIG_PACKAGE_v4l-utils is not set
 +# CONFIG_PACKAGE_watchcat is not set
  # CONFIG_PACKAGE_whereis is not set
---- a/package/system/mtd/src/Makefile
-+++ b/package/system/mtd/src/Makefile
-@@ -11,6 +11,7 @@ obj.bcm53xx = $(obj.brcm)
- obj.brcm63xx = imagetag.o
- obj.ramips = $(obj.seama)
- obj.mvebu = linksys_bootcount.o
-+obj.kirkwood = linksys_bootcount.o
- 
- ifdef FIS_SUPPORT
-   obj += fis.o
-diff --git a/target/linux/kirkwood/base-files/etc/init.d/linksys_recovery b/target/linux/kirkwood/base-files/etc/init.d/linksys_recovery
 new file mode 100755
-index 0000000..1b8d701
+index 0000000..699b5f5
 --- /dev/null
 +++ b/target/linux/kirkwood/base-files/etc/init.d/linksys_recovery
 @@ -0,0 +1,20 @@
@@ -1253,7 +1258,7 @@ index 0000000..1b8d701
 +. /lib/kirkwood.sh
 +
 +case $(kirkwood_board_name) in
-+	ea4500)
++	ea4500|ea3500)
 +		# make sure auto_recovery in uboot is always on
 +		AUTO_RECOVERY_ENA="`fw_printenv -n auto_recovery`"
 +		if [ "$AUTO_RECOVERY_ENA" != "yes" ] ; then
