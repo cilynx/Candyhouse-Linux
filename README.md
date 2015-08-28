@@ -38,11 +38,14 @@ For more info and disucssion about OpenWRT on Candyhouse routers, please visit:
 
 [http://www.wolfteck.com/projects/candyhouse/openwrt/](http://www.wolfteck.com/projects/candyhouse/openwrt/)
 
-## Avoiding/Fixing the 3-reboot-stock bug
+## Returning to the stock firmware for reflashing
 
-Candyhouse routers have a failed boot counter that acts as a safety mechanism. After three failed boots, the bootloader automatically stops trying to boot the failing firmware image and switches to the other partition set -- the "last known good". OpenWRT is not aware of this couter and as such does not reset it on successful boot. Thus, if you reboot OpenWRT three times, you'll find that you're back to the Cisco stock firmware. Conversly after another 3 reboots it will switch back to OpenWRT.
+Candyhouse routers have two seperate partitions for firmware and a failed boot counter that acts as a safety mechanism. After three failed boots, the bootloader automatically stops trying to boot the failing firmware image and switches to the other partition set -- the "last known good". This build of OpenWRT will reset it to 0 on a successful boot. Since firmware flashing is currently not possible from this OpenWRT build we need to return to the stock firmware to flash new OpenWRT builds.
 
-To get around this issue, add your public SSH key after initial setup to the routers list, then `ssh root@192.168.1.1`. Once you're in the routers shell run `fw_setenv auto_recovery no`. This will stop the router from reverting to the stock firmware after 3 reboots. 
+You can switch firmware by convincing the router it has three bad boots, either by powering off the router 5 seconds after it starts repeatedly - 3 times in succession.
+
+Or switch by disabling the boot counter reset in OpenWRT and doing three normal reboots. You can disable the reset by ssh'ing into the router: `ssh root@192.168.1.1` and removing executable permissions for the reset script 'chmod 644 /etc/init.d/linksys_recovery'. 
+
 
 # Building / Installing Modules
 
