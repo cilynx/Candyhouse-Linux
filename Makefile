@@ -60,10 +60,11 @@ openwrt-kirkwood-ea3500-pri.ssa: .openwrt_luci
 	cd openwrt && patch -p1 < ../patches/openwrt.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch
+	cd openwrt && chmod 755 target/linux/kirkwood/base-files/etc/init.d/linksys_recovery
 	cd openwrt && make target/linux/clean
 	cd openwrt && make oldconfig && make -j4
-	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt-pri.patch
+	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt.patch
 	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea3500.ssa openwrt-kirkwood-ea3500-pri.ssa
 
@@ -71,10 +72,11 @@ openwrt-kirkwood-ea3500-alt.ssa: .openwrt_luci
 	cd openwrt && patch -p1 < ../patches/openwrt.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch
+	cd openwrt && chmod 755 target/linux/kirkwood/base-files/etc/init.d/linksys_recovery
 	cd openwrt && make target/linux/clean
 	cd openwrt && make oldconfig && make -j4
-	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt-alt.patch
+	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt.patch
 	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea3500.ssa openwrt-kirkwood-ea3500-alt.ssa
 
@@ -82,10 +84,11 @@ openwrt-kirkwood-ea4500-pri.ssa: .openwrt_luci
 	cd openwrt && patch -p1 < ../patches/openwrt.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch
+	cd openwrt && chmod 755 target/linux/kirkwood/base-files/etc/init.d/linksys_recovery
 	cd openwrt && make target/linux/clean
 	cd openwrt && make oldconfig && make -j4
-	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt-pri.patch
+	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt.patch
 	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea4500.ssa openwrt-kirkwood-ea4500-pri.ssa
 
@@ -93,10 +96,11 @@ openwrt-kirkwood-ea4500-alt.ssa: .openwrt_luci
 	cd openwrt && patch -p1 < ../patches/openwrt.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-4500.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch
+	cd openwrt && chmod 755 target/linux/kirkwood/base-files/etc/init.d/linksys_recovery
 	cd openwrt && make target/linux/clean
 	cd openwrt && make oldconfig && make -j4
-	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt-alt.patch
+	cd openwrt && patch -p1 -R < ../patches/openwrt-4500.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt.patch
 	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea4500.ssa openwrt-kirkwood-ea4500-alt.ssa
 
