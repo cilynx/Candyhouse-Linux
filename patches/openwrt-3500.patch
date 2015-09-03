@@ -1,14 +1,3 @@
---- a/.config
-+++ b/.config
-@@ -48,6 +48,8 @@
- # CONFIG_TARGET_kirkwood_ICONNECT is not set
- # CONFIG_TARGET_kirkwood_IOMEGA_IX2_200 is not set
- # CONFIG_TARGET_kirkwood_POGOE02 is not set
-+CONFIG_TARGET_kirkwood_EA3500=y
-+# CONFIG_TARGET_kirkwood_EA4500 is not set
- # CONFIG_TARGET_kirkwood_SHEEVAPLUG is not set
- # CONFIG_TARGET_kirkwood_SHEEVAPLUGSATA is not set
- # CONFIG_TARGET_kirkwood_GuruplugServerPlus is not set
 --- a/target/linux/kirkwood/image/Makefile
 +++ a/target/linux/kirkwood/image/Makefile
 @@ -127,5 +127,8 @@

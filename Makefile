@@ -57,28 +57,38 @@ openwrt4500:: openwrt-kirkwood-ea4500-pri.ssa openwrt-kirkwood-ea4500-alt.ssa
 	touch $@
 
 openwrt-kirkwood-ea3500-pri.ssa: .openwrt_luci
+	cp openwrt/.config openwrt/.config-orig
+	cd openwrt && patch -p1 < ../patches/openwrt-config.patch
+	cd openwrt && patch -p1 < ../patches/openwrt-3500-config.patch
 	cd openwrt && patch -p1 < ../patches/openwrt.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch
 	cd openwrt && chmod 755 target/linux/kirkwood/base-files/etc/init.d/linksys_recovery
 	cd openwrt && make target/linux/clean
+	cd openwrt && make menuconfig
 	cd openwrt && make oldconfig && make -j4
+	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea3500.ssa openwrt-kirkwood-ea3500-pri.ssa
+	cp openwrt/.config-orig openwrt/.config
 	cd openwrt && patch -p1 -R < ../patches/openwrt-pri.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt.patch
-	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea3500.ssa openwrt-kirkwood-ea3500-pri.ssa
+
 
 openwrt-kirkwood-ea3500-alt.ssa: .openwrt_luci
+	cp openwrt/.config openwrt/.config-orig
+	cd openwrt && patch -p1 < ../patches/openwrt-config.patch
+	cd openwrt && patch -p1 < ../patches/openwrt-3500-config.patch
 	cd openwrt && patch -p1 < ../patches/openwrt.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-3500.patch
 	cd openwrt && patch -p1 < ../patches/openwrt-alt.patch
 	cd openwrt && chmod 755 target/linux/kirkwood/base-files/etc/init.d/linksys_recovery
 	cd openwrt && make target/linux/clean
 	cd openwrt && make oldconfig && make -j4
+	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea3500.ssa openwrt-kirkwood-ea3500-alt.ssa
+	cp openwrt/.config-orig openwrt/.config
 	cd openwrt && patch -p1 -R < ../patches/openwrt-alt.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt-3500.patch
 	cd openwrt && patch -p1 -R < ../patches/openwrt.patch
-	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea3500.ssa openwrt-kirkwood-ea3500-alt.ssa
 
 openwrt-kirkwood-ea4500-pri.ssa: .openwrt_luci
 	cd openwrt && patch -p1 < ../patches/openwrt.patch
