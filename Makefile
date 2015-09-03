@@ -65,7 +65,6 @@ openwrt-kirkwood-ea3500-pri.ssa: .openwrt_luci
 	cd openwrt && patch -p1 < ../patches/openwrt-pri.patch
 	cd openwrt && chmod 755 target/linux/kirkwood/base-files/etc/init.d/linksys_recovery
 	cd openwrt && make target/linux/clean
-	cd openwrt && make menuconfig
 	cd openwrt && make oldconfig && make -j4
 	cp openwrt/bin/kirkwood/openwrt-kirkwood-ea3500.ssa openwrt-kirkwood-ea3500-pri.ssa
 	cp openwrt/.config-orig openwrt/.config
