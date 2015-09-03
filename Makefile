@@ -121,6 +121,7 @@ usb-distclean: usb-clean
 
 openwrt-clean::
 	rm -rf *.ssa
+	cd openwrt && make clean
 
 openwrt-distclean: openwrt-clean
 	rm -rf openwrt/ .openwrt*
